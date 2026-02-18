@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول تنظيم العبادة في رمضان</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        :root {
+            --gold: #C6A84D;
+            --gold-light: #E8D48B;
+            --dark-green: #0D4D2B;
+            --green: #1A7A4A;
+            --light-green: #E8F5E9;
+            --cream: #FFF8E7;
+            --dark: #1a1a2e;
+            --accent: #D4AF37;
+            --border: #B8860B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0D4D2B 0%, #1a1a2e 50%, #0D4D2B 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 3px solid var(--gold);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #0a3d22 50%, var(--dark-green) 100%);
+            padding: 40px 30px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C6A84D' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 28px;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(198, 168, 77, 0.3);
+        }
+
+        .crescent {
+            font-size: 50px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 15px rgba(198, 168, 77, 0.5));
+        }
+
+        .main-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 2px 15px rgba(198, 168, 77, 0.4);
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .sub-title {
+            font-size: 18px;
+            color: var(--gold-light);
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--accent));
+            color: var(--dark-green);
+            padding: 5px 25px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* ===== MOTIVATIONAL SECTION ===== */
+        .motivation {
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            padding: 15px 30px;
+            text-align: center;
+        }
+
+        .motivation p {
+            font-family: 'Amiri', serif;
+            font-size: 22px;
+            color: var(--dark-green);
+            font-weight: 700;
+        }
+
+        .motivation .hadith-ref {
+            font-size: 14px;
+            font-family: 'Cairo', sans-serif;
+            color: #555;
+            font-weight: 600;
+        }
+
+        /* ===== NAME & INFO SECTION ===== */
+        .info-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 20px 30px;
+            background: #f9f3e3;
+            border-bottom: 2px solid var(--gold);
+            flex-wrap: wrap;
+        }
+
+        .info-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 450px;
+        }
+
+        .info-field label {
+            font-weight: 700;
+            color: var(--dark-green);
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .info-field input {
+            flex: 1;
+            padding: 8px 15px;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            background: white;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark-green);
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .info-field input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 10px rgba(26, 122, 74, 0.2);
+        }
+
+        .info-field input::placeholder {
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        /* ===== LEGEND ===== */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 12px 30px;
+            background: var(--light-green);
+            border-bottom: 2px solid var(--gold);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+
+        .legend-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        /* ===== TABLE ===== */
+        .table-wrapper {
+            overflow-x: auto;
+            padding: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 12px;
+        }
+
+        thead th {
+            background: linear-gradient(180deg, var(--dark-green), #0a3d22);
+            color: var(--gold);
+            padding: 10px 4px;
+            font-weight: 700;
+            font-size: 13px;
+            border: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            text-align: center;
+        }
+
+        thead th:first-child {
+            min-width: 160px;
+            text-align: right;
+            padding-right: 10px;
+            position: sticky;
+            left: 0;
+            z-index: 25;
+            background: var(--dark-green);
+        }
+
+        thead th.day-header {
+            min-width: 36px;
+            width: 36px;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(232, 245, 233, 0.3);
+        }
+
+        tbody tr:hover {
+            background: rgba(198, 168, 77, 0.1);
+        }
+
+        tbody td {
+            border: 1px solid #d4c89a;
+            padding: 6px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tbody td:first-child {
+            text-align: right;
+            padding-right: 10px;
+            font-weight: 700;
+            color: var(--dark-green);
+            white-space: nowrap;
+            background: #faf5e4;
+            font-size: 13px;
+            position: sticky;
+            left: 0;
+            z-index: 5;
+        }
+
+        tbody tr:nth-child(even) td:first-child {
+            background: #f0edd8;
+        }
+
+        .category-row td {
+            position: sticky !important;
+            left: 0 !important;
+            z-index: 6 !important;
+        }
+
+        .worship-icon {
+            margin-left: 5px;
+            font-size: 16px;
+        }
+
+        .checkbox-cell {
+            width: 36px;
+            height: 28px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .checkbox-cell:hover {
+            background: rgba(26, 122, 74, 0.15) !important;
+        }
+
+        .checkbox-cell.checked {
+            background: rgba(26, 122, 74, 0.12) !important;
+        }
+
+        .checkbox-cell.checked::after {
+            content: '✓';
+            color: var(--green);
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        /* ===== CATEGORY ROWS ===== */
+        .category-row td {
+            background: var(--gold) !important;
+            color: var(--dark-green) !important;
+            font-weight: 800 !important;
+            font-size: 14px !important;
+            text-align: center !important;
+            padding: 8px !important;
+            letter-spacing: 1px;
+        }
+
+        /* ===== SPECIAL ROWS ===== */
+        .last-ten {
+            background: rgba(198, 168, 77, 0.15) !important;
+        }
+
+        .last-ten td:first-child {
+            background: rgba(198, 168, 77, 0.25) !important;
+        }
+
+        /* ===== PROGRESS SECTION ===== */
+        .progress-section {
+            padding: 25px 30px;
+            background: #f9f3e3;
+            border-top: 2px solid var(--gold);
+        }
+
+        .progress-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .progress-card {
+            background: white;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .progress-card h4 {
+            color: var(--dark-green);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), var(--gold));
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .progress-percent {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--green);
+            margin-top: 5px;
+        }
+
+        /* ===== DUA SECTION ===== */
+        .dua-section {
+            background: linear-gradient(135deg, var(--dark-green), #0a3d22);
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .dua-section p {
+            font-family: 'Amiri', serif;
+            font-size: 22px;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .dua-section .meaning {
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            color: var(--gold-light);
+            opacity: 0.8;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--gold);
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--dark-green);
+            font-weight: 700;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        .no-print {
+            display: block;
+        }
+
+        /* ===== ACTION TOOLBAR ===== */
+        .action-toolbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 30px;
+            background: linear-gradient(90deg, var(--dark-green), #0a3d22, var(--dark-green));
+            flex-wrap: wrap;
+        }
+
+        .action-toolbar .toolbar-btn {
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toolbar-btn.print-btn {
+            background: linear-gradient(135deg, var(--gold), var(--accent));
+            color: var(--dark-green);
+            box-shadow: 0 4px 15px rgba(198, 168, 77, 0.3);
+        }
+
+        .toolbar-btn.print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(198, 168, 77, 0.5);
+        }
+
+        .toolbar-btn.reset-btn {
+            background: linear-gradient(135deg, #8B0000, #c0392b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.2);
+        }
+
+        .toolbar-btn.reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+                margin: 3mm;
+            }
+
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .container {
+                box-shadow: none !important;
+                border: none !important;
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+            }
+
+            /* Hide everything except info and table */
+            .header,
+            .motivation,
+            .dua-section,
+            .footer,
+            .no-print,
+            .action-toolbar,
+            .legend,
+            .stats-bar,
+            .progress-section {
+                display: none !important;
+            }
+
+            /* Show a very compact title for print */
+            .container::before {
+                content: "جدول تنظيم العبادة في رمضان - ١٤٤٧ هـ";
+                display: block;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 800;
+                margin: 0 0 5px 0;
+                color: #0D4D2B;
+            }
+
+            .info-section {
+                display: flex !important;
+                flex-direction: row !important;
+                padding: 2px 5px !important;
+                margin-bottom: 2px !important;
+                background: transparent !important;
+                border: 1px solid #ddd !important;
+                gap: 20px !important;
+            }
+
+            .info-field {
+                flex: 1 !important;
+                min-width: 0 !important;
+            }
+
+            .info-field label {
+                font-size: 11px !important;
+            }
+
+            .info-field input {
+                border-bottom: 1px solid #333 !important;
+                border-top: none !important;
+                border-left: none !important;
+                border-right: none !important;
+                font-size: 11px !important;
+                padding: 1px !important;
+            }
+
+            .table-wrapper {
+                padding: 0 !important;
+                overflow: visible !important;
+                height: 91vh !important;
+                /* Scaled to fit all rows on A4/A3 */
+            }
+
+            table {
+                font-size: 7px !important;
+                width: 100% !important;
+                table-layout: fixed !important;
+                border-collapse: collapse !important;
+            }
+
+            thead th,
+            tbody td {
+                border: 0.5pt solid #888 !important;
+                position: static !important;
+                background: white !important;
+                color: black !important;
+                padding: 1px !important;
+                height: 3.1vh !important;
+                /* Balanced for all paper sizes */
+            }
+
+            thead th {
+                background: #f5f5f5 !important;
+                font-weight: bold !important;
+                height: 2.1vh !important;
+            }
+
+            thead th:first-child,
+            tbody td:first-child {
+                width: 18vw !important;
+                font-size: 1.1vh !important;
+                text-align: right !important;
+                padding-right: 5px !important;
+                background: #f9f9f9 !important;
+                white-space: normal !important;
+                word-wrap: break-word !important;
+            }
+
+            .day-header,
+            .checkbox-cell {
+                width: auto !important;
+            }
+
+            .checkbox-cell.checked::after {
+                font-size: 9px !important;
+                color: green !important;
+            }
+
+            .category-row td {
+                background: #eee !important;
+                font-size: 1.1vh !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                padding: 2px !important;
+                height: 2.1vh !important;
+            }
+
+            thead th:last-child,
+            .row-total {
+                width: 40px !important;
+                font-size: 7px !important;
+                visibility: hidden !important;
+            }
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                border-radius: 12px;
+                border-width: 2px;
+            }
+
+            .header {
+                padding: 25px 15px 20px;
+            }
+
+            .bismillah {
+                font-size: 20px;
+            }
+
+            .crescent {
+                font-size: 36px;
+                margin-bottom: 6px;
+            }
+
+            .main-title {
+                font-size: 22px;
+                letter-spacing: 1px;
+            }
+
+            .sub-title {
+                font-size: 14px;
+            }
+
+            .year-badge {
+                font-size: 13px;
+                padding: 4px 18px;
+            }
+
+            .motivation {
+                padding: 10px 15px;
+            }
+
+            .motivation p {
+                font-size: 16px;
+            }
+
+            .motivation .hadith-ref {
+                font-size: 12px;
+            }
+
+            .info-section {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px 15px;
+            }
+
+            .info-field {
+                max-width: 100%;
+                min-width: unset;
+                width: 100%;
+            }
+
+            .info-field label {
+                font-size: 14px;
+            }
+
+            .info-field input {
+                font-size: 14px;
+                padding: 7px 10px;
+            }
+
+            .legend {
+                gap: 10px;
+                padding: 10px 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .legend-item {
+                font-size: 12px;
+            }
+
+            .stats-bar {
+                gap: 15px;
+                padding: 12px 10px;
+            }
+
+            .stat-number {
+                font-size: 18px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .table-wrapper {
+                padding: 8px;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            thead th {
+                padding: 7px 3px;
+                font-size: 11px;
+            }
+
+            thead th:first-child {
+                min-width: 120px;
+                padding-right: 6px;
+            }
+
+            tbody td:first-child {
+                font-size: 11px;
+                padding-right: 6px;
+            }
+
+            .checkbox-cell {
+                width: 30px;
+                height: 26px;
+                min-width: 30px;
+            }
+
+            .checkbox-cell.checked::after {
+                font-size: 15px;
+            }
+
+            thead th.day-header {
+                min-width: 30px;
+                width: 30px;
+            }
+
+            .category-row td {
+                font-size: 12px !important;
+                padding: 6px !important;
+            }
+
+            .worship-icon {
+                font-size: 13px;
+                margin-left: 3px;
+            }
+
+            .progress-section {
+                padding: 15px;
+            }
+
+            .progress-title {
+                font-size: 16px;
+            }
+
+            .progress-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .progress-card {
+                padding: 10px;
+            }
+
+            .progress-card h4 {
+                font-size: 12px;
+            }
+
+            .progress-percent {
+                font-size: 15px;
+            }
+
+            .action-toolbar {
+                padding: 12px 15px;
+                gap: 10px;
+            }
+
+            .action-toolbar .toolbar-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .dua-section {
+                padding: 18px 15px;
+            }
+
+            .dua-section p {
+                font-size: 17px;
+            }
+
+            .dua-section .meaning {
+                font-size: 12px;
+            }
+
+            .footer {
+                font-size: 11px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 4px;
+            }
+
+            .container {
+                border-radius: 8px;
+            }
+
+            .header {
+                padding: 18px 10px 15px;
+            }
+
+            .bismillah {
+                font-size: 17px;
+            }
+
+            .crescent {
+                font-size: 30px;
+                margin-bottom: 4px;
+            }
+
+            .main-title {
+                font-size: 18px;
+                letter-spacing: 0;
+            }
+
+            .sub-title {
+                font-size: 12px;
+            }
+
+            .year-badge {
+                font-size: 11px;
+                padding: 3px 14px;
+            }
+
+            .motivation p {
+                font-size: 14px;
+            }
+
+            .info-section {
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .info-field {
+                gap: 6px;
+            }
+
+            .info-field label {
+                font-size: 13px;
+            }
+
+            .info-field input {
+                font-size: 13px;
+                padding: 6px 8px;
+                border-radius: 8px;
+            }
+
+            .stats-bar {
+                gap: 10px;
+                padding: 10px 8px;
+            }
+
+            .stat-number {
+                font-size: 16px;
+            }
+
+            table {
+                font-size: 10px;
+            }
+
+            thead th {
+                padding: 5px 2px;
+                font-size: 10px;
+            }
+
+            thead th:first-child {
+                min-width: 100px;
+                font-size: 10px;
+            }
+
+            tbody td:first-child {
+                font-size: 10px;
+                min-width: 100px;
+            }
+
+            .checkbox-cell {
+                width: 26px;
+                height: 24px;
+                min-width: 26px;
+            }
+
+            .checkbox-cell.checked::after {
+                font-size: 13px;
+            }
+
+            thead th.day-header {
+                min-width: 26px;
+                width: 26px;
+            }
+
+            .progress-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .action-toolbar .toolbar-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+                border-radius: 10px;
+            }
+
+            .dua-section p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header {
+                padding: 14px 8px 12px;
+            }
+
+            .bismillah {
+                font-size: 15px;
+            }
+
+            .crescent {
+                font-size: 26px;
+            }
+
+            .main-title {
+                font-size: 16px;
+            }
+
+            .sub-title {
+                font-size: 11px;
+            }
+
+            .year-badge {
+                font-size: 10px;
+                padding: 2px 12px;
+            }
+
+            .motivation {
+                padding: 8px 10px;
+            }
+
+            .motivation p {
+                font-size: 12px;
+            }
+
+            .info-section {
+                padding: 8px;
+            }
+
+            .info-field label {
+                font-size: 12px;
+            }
+
+            .info-field input {
+                font-size: 12px;
+                padding: 5px 6px;
+            }
+
+            .stats-bar {
+                gap: 8px;
+                padding: 8px 6px;
+            }
+
+            .stat-number {
+                font-size: 14px;
+            }
+
+            .stat-label {
+                font-size: 9px;
+            }
+
+            table {
+                font-size: 9px;
+            }
+
+            thead th {
+                padding: 4px 1px;
+                font-size: 9px;
+            }
+
+            thead th:first-child {
+                min-width: 85px;
+            }
+
+            tbody td:first-child {
+                font-size: 9px;
+                min-width: 85px;
+                padding-right: 4px;
+            }
+
+            .checkbox-cell {
+                width: 22px;
+                height: 22px;
+                min-width: 22px;
+            }
+
+            .checkbox-cell.checked::after {
+                font-size: 12px;
+            }
+
+            thead th.day-header {
+                min-width: 22px;
+                width: 22px;
+            }
+
+            .category-row td {
+                font-size: 10px !important;
+                padding: 4px !important;
+            }
+
+            .worship-icon {
+                font-size: 11px;
+                margin-left: 2px;
+            }
+
+            .progress-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-toolbar {
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .action-toolbar .toolbar-btn {
+                padding: 7px 14px;
+                font-size: 12px;
+            }
+
+            .dua-section {
+                padding: 12px 8px;
+            }
+
+            .dua-section p {
+                font-size: 13px;
+            }
+
+            .footer {
+                font-size: 10px;
+                padding: 8px;
+            }
+        }
+
+        /* ===== STATS COUNTER ===== */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--dark-green), #0a3d22, var(--dark-green));
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: var(--gold);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-content">
+                <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <h1 class="main-title">جدول تنظيم العبادة في رمضان</h1>
+                <p class="sub-title">اللهم بلغنا رمضان وأعنا على صيامه وقيامه</p>
+                <span class="year-badge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
+            </div>
+        </div>
+
+        <!-- MOTIVATIONAL QUOTE -->
+        <div class="motivation">
+            <p>« مَنْ صَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ »</p>
+            <span class="hadith-ref">— متفق عليه</span>
+        </div>
+
+        <!-- NAME & MOTIVATION SECTION -->
+        <div class="info-section">
+            <div class="info-field">
+                <label>الاسم:</label>
+                <input type="text" id="userName" placeholder="اكتب اسمك هنا..." maxlength="30">
+            </div>
+            <div class="info-field">
+                <label>شجّع نفسك:</label>
+                <input type="text" id="userMotivation" placeholder="اكتب كلمة تشجيع لنفسك..." maxlength="60">
+            </div>
+        </div>
+
+        <!-- LEGEND -->
+        <div class="legend no-print">
+            <div class="legend-item">
+                <div class="legend-check">✓</div>
+                <span>تم بفضل الله</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-check" style="border-color:#ccc; color:#ccc;">—</div>
+                <span>لم يتم</span>
+            </div>
+            <div class="legend-item">
+                <span>💡 اضغط على أي خلية لتسجيل الإنجاز</span>
+            </div>
+        </div>
+
+        <!-- STATS BAR -->
+        <div class="stats-bar no-print">
+            <div class="stat-item">
+                <div class="stat-number" id="totalChecked">0</div>
+                <div class="stat-label">عبادة مُنجَزة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalPossible">0</div>
+                <div class="stat-label">إجمالي العبادات</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="overallPercent">0%</div>
+                <div class="stat-label">نسبة الإنجاز</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="bestDay">—</div>
+                <div class="stat-label">أفضل يوم</div>
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-wrapper">
+            <table id="worshipTable">
+                <thead>
+                    <tr>
+                        <th>العبادة</th>
+                        <script>
+                            // Will be populated by JS
+                        </script>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="progress-section no-print">
+            <h3 class="progress-title">متابعة التقدم</h3>
+            <div class="progress-grid" id="progressGrid">
+            </div>
+        </div>
+
+        <!-- ACTION TOOLBAR -->
+        <div class="action-toolbar no-print">
+            <button class="toolbar-btn print-btn" onclick="window.print()">طباعة الجدول</button>
+            <button class="toolbar-btn reset-btn" onclick="resetAll()">إعادة تعيين الكل</button>
+        </div>
+
+        <!-- DUA -->
+        <div class="dua-section">
+            <p>« اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي »</p>
+            <span class="meaning">دعاء ليلة القدر — رواه الترمذي</span>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            اجعل هذا الشهر نقطة تحول في حياتك — لا تضيع يومًا بدون عبادة
+        </div>
+    </div>
+
+    <script>
+        const DAYS = 30;
+
+        // Worship categories and items
+        const worshipData = [
+            {
+                category: 'الصلوات المفروضة',
+                items: [
+                    { id: 'fajr', name: 'صلاة الفجر', icon: '' },
+                    { id: 'dhuhr', name: 'صلاة الظهر', icon: '' },
+                    { id: 'asr', name: 'صلاة العصر', icon: '' },
+                    { id: 'maghrib', name: 'صلاة المغرب', icon: '' },
+                    { id: 'isha', name: 'صلاة العشاء', icon: '' },
+                ]
+            },
+            {
+                category: 'النوافل والسُّنن',
+                items: [
+                    { id: 'sunnah_rawatib', name: 'السنن الرواتب', icon: '' },
+                    { id: 'taraweeh', name: 'صلاة التراويح', icon: '' },
+                    { id: 'witr', name: 'صلاة الوتر', icon: '' },
+                    { id: 'duha', name: 'صلاة الضحى', icon: '' },
+                    { id: 'tahajjud', name: 'قيام الليل / التهجد', icon: '' },
+                ]
+            },
+            {
+                category: 'القرآن والذِّكر',
+                items: [
+                    { id: 'quran', name: 'قراءة القرآن (جزء/حزب)', icon: '' },
+                    { id: 'adhkar_sabah', name: 'أذكار الصباح', icon: '' },
+                    { id: 'adhkar_masaa', name: 'أذكار المساء', icon: '' },
+                    { id: 'istighfar', name: 'الاستغفار (١٠٠ مرة)', icon: '' },
+                    { id: 'salawat', name: 'الصلاة على النبي ﷺ', icon: '' },
+                    { id: 'dua', name: 'الدعاء والتضرع', icon: '' },
+                ]
+            },
+            {
+                category: 'الأعمال والمعاملات',
+                items: [
+                    { id: 'siyam', name: 'الصيام', icon: '' },
+                    { id: 'sadaqah', name: 'الصدقة ولو بالقليل', icon: '' },
+                    { id: 'iftar_saim', name: 'تفطير صائم', icon: '' },
+                    { id: 'silat_rahim', name: 'صلة الرحم', icon: '' },
+                    { id: 'ikhlas_niyyah', name: 'إخلاص النية وحُسن الخُلق', icon: '' },
+                ]
+            }
+        ];
+
+        // Build table
+        function buildTable() {
+            const thead = document.querySelector('thead tr');
+            const tbody = document.getElementById('tableBody');
+
+            // Add day headers
+            for (let d = 1; d <= DAYS; d++) {
+                const th = document.createElement('th');
+                th.className = 'day-header';
+                th.textContent = d;
+                if (d >= 21) th.style.background = 'linear-gradient(180deg, #5c3d00, #3d2800)';
+                thead.appendChild(th);
+            }
+
+            // Add total column
+            const thTotal = document.createElement('th');
+            thTotal.textContent = 'المجموع';
+            thTotal.style.minWidth = '55px';
+            thead.appendChild(thTotal);
+
+            // Build rows
+            worshipData.forEach(cat => {
+                // Category row
+                const catRow = document.createElement('tr');
+                catRow.className = 'category-row';
+                const catTd = document.createElement('td');
+                catTd.colSpan = DAYS + 2;
+                catTd.textContent = cat.category;
+                catRow.appendChild(catTd);
+                tbody.appendChild(catRow);
+
+                // Item rows
+                cat.items.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    // Name cell
+                    const nameCell = document.createElement('td');
+                    nameCell.innerHTML = `<span class="worship-icon">${item.icon}</span> ${item.name}`;
+                    row.appendChild(nameCell);
+
+                    // Day cells
+                    for (let d = 1; d <= DAYS; d++) {
+                        const cell = document.createElement('td');
+                        cell.className = 'checkbox-cell';
+                        cell.dataset.worship = item.id;
+                        cell.dataset.day = d;
+                        if (d >= 21) cell.classList.add('last-ten');
+
+                        cell.addEventListener('click', function () {
+                            this.classList.toggle('checked');
+                            saveState();
+                            updateStats();
+                        });
+
+                        row.appendChild(cell);
+                    }
+
+                    // Total cell
+                    const totalCell = document.createElement('td');
+                    totalCell.className = 'row-total';
+                    totalCell.dataset.worship = item.id;
+                    totalCell.style.fontWeight = '800';
+                    totalCell.style.color = 'var(--dark-green)';
+                    totalCell.style.background = 'rgba(232, 245, 233, 0.5)';
+                    totalCell.textContent = '0';
+                    row.appendChild(totalCell);
+
+                    tbody.appendChild(row);
+                });
+            });
+        }
+
+        // Stats
+        function updateStats() {
+            const allCells = document.querySelectorAll('.checkbox-cell');
+            const checked = document.querySelectorAll('.checkbox-cell.checked');
+            const total = allCells.length;
+            const done = checked.length;
+
+            document.getElementById('totalChecked').textContent = done;
+            document.getElementById('totalPossible').textContent = total;
+            document.getElementById('overallPercent').textContent = Math.round((done / total) * 100) + '%';
+
+            // Best day
+            let dayScores = {};
+            for (let d = 1; d <= DAYS; d++) dayScores[d] = 0;
+            checked.forEach(c => {
+                dayScores[c.dataset.day]++;
+            });
+            let bestDay = '—';
+            let bestScore = 0;
+            for (let d = 1; d <= DAYS; d++) {
+                if (dayScores[d] > bestScore) {
+                    bestScore = dayScores[d];
+                    bestDay = d;
+                }
+            }
+            document.getElementById('bestDay').textContent = bestScore > 0 ? bestDay : '—';
+
+            // Row totals
+            const allItems = worshipData.flatMap(c => c.items);
+            allItems.forEach(item => {
+                const itemChecked = document.querySelectorAll(`.checkbox-cell.checked[data-worship="${item.id}"]`).length;
+                const totalCell = document.querySelector(`.row-total[data-worship="${item.id}"]`);
+                if (totalCell) {
+                    totalCell.textContent = itemChecked + '/' + DAYS;
+                    // Color coding
+                    const pct = itemChecked / DAYS;
+                    if (pct >= 0.8) totalCell.style.color = '#27ae60';
+                    else if (pct >= 0.5) totalCell.style.color = '#f39c12';
+                    else if (pct > 0) totalCell.style.color = '#e74c3c';
+                    else totalCell.style.color = '#999';
+                }
+            });
+
+            // Progress cards
+            updateProgress();
+        }
+
+        // Progress cards for each category
+        function updateProgress() {
+            const grid = document.getElementById('progressGrid');
+            grid.innerHTML = '';
+
+            worshipData.forEach(cat => {
+                let catTotal = 0;
+                let catChecked = 0;
+                cat.items.forEach(item => {
+                    catTotal += DAYS;
+                    catChecked += document.querySelectorAll(`.checkbox-cell.checked[data-worship="${item.id}"]`).length;
+                });
+
+                const pct = catTotal > 0 ? Math.round((catChecked / catTotal) * 100) : 0;
+
+                const card = document.createElement('div');
+                card.className = 'progress-card';
+                card.innerHTML = `
+                <h4>${cat.category}</h4>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: ${pct}%"></div>
+                </div>
+                <div class="progress-percent">${pct}%</div>
+            `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Save/Load state
+        function saveState() {
+            const state = {};
+            document.querySelectorAll('.checkbox-cell.checked').forEach(cell => {
+                const key = cell.dataset.worship + '_' + cell.dataset.day;
+                state[key] = true;
+            });
+            localStorage.setItem('ramadan_tracker_2026', JSON.stringify(state));
+        }
+
+        function saveUserInfo() {
+            const name = document.getElementById('userName').value;
+            const motivation = document.getElementById('userMotivation').value;
+            localStorage.setItem('ramadan_user_name', name);
+            localStorage.setItem('ramadan_user_motivation', motivation);
+        }
+
+        function loadUserInfo() {
+            const name = localStorage.getItem('ramadan_user_name');
+            const motivation = localStorage.getItem('ramadan_user_motivation');
+            if (name) document.getElementById('userName').value = name;
+            if (motivation) document.getElementById('userMotivation').value = motivation;
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('ramadan_tracker_2026');
+            if (saved) {
+                const state = JSON.parse(saved);
+                Object.keys(state).forEach(key => {
+                    const [worship, day] = key.split('_');
+                    const cell = document.querySelector(`.checkbox-cell[data-worship="${worship}"][data-day="${day}"]`);
+                    if (cell) cell.classList.add('checked');
+                });
+            }
+        }
+
+        function resetAll() {
+            if (confirm('هل أنت متأكد؟ سيتم مسح جميع البيانات المحفوظة')) {
+                localStorage.removeItem('ramadan_tracker_2026');
+                localStorage.removeItem('ramadan_user_name');
+                localStorage.removeItem('ramadan_user_motivation');
+                document.querySelectorAll('.checkbox-cell.checked').forEach(c => c.classList.remove('checked'));
+                document.getElementById('userName').value = '';
+                document.getElementById('userMotivation').value = '';
+                updateStats();
+            }
+        }
+
+        // Input event listeners for auto-save
+        document.getElementById('userName').addEventListener('input', saveUserInfo);
+        document.getElementById('userMotivation').addEventListener('input', saveUserInfo);
+
+        // Initialize
+        buildTable();
+        loadState();
+        loadUserInfo();
+        updateStats();
+    </script>
+
+</body>
+
+</html>
