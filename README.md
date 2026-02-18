@@ -4,7 +4,7 @@
 
 **Ramadan Worship Tracker — جدول تتبع العبادات اليومية في شهر رمضان المبارك**
 
-[![GitHub Pages](https://img.shields.io/badge/🔗_جرّبه_الآن-GitHub_Pages-0D4D2B?style=for-the-badge)](https://joy-s-s.github.io/Ramadan-Tracker/)
+[![GitHub Pages](https://img.shields.io/badge/🔗_جربه_الآن-GitHub_Pages-0D4D2B?style=for-the-badge)](https://joy-s-s.github.io/Ramadan-Tracker/)
 
 </div>
 
@@ -66,4 +66,5 @@
 🌙 **رمضان كريم** 🌙
 
 </div>
+
 
