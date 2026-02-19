@@ -10,7 +10,7 @@
 
 ---
 
-## العربية (Arabic)
+## 🇪🇬 النسخة العربية (Arabic)
 
 تطبيق ويب بسيط وتفاعلي لتنظيم وتتبع عباداتك خلال شهر رمضان.
 
@@ -32,11 +32,31 @@
 1. افتح [الرابط المباشر](https://joy-s-s.github.io/Ramadan-Tracker/).
 2. اختر لغتك من زر التبديل (عربي/English).
 3. اضغط على أي خلية لتسجيل العبادة.
-4. للطباعة: استخدم زر "طباعة الجدول" (يفضل وضع Landscape).
+4. تابع إحصائياتك في الأسفل
+5. للطباعة: اضغط زر 🖨️ طباعة الجدول
 
 ---
 
-## English (الإنجليزية)
+## 📿 تطبيق المُسبّح (Tasbih App)
+
+أضفنا أداة جديدة مخصصة للأذكار والتسبيح اليومي بمميزات إبداعية:
+- **دوائر تفاعلية**: تكبر الدائرة كلما اقتربت من هدفك.
+- **تخصيص الأهداف**: اختر بين 33، 100، أو 1000 تسبيحة.
+- **حفظ تلقائي**: عدادك محفوظ دائماً.
+- **تصميم مريح**: يتماشى تماماً مع ثيم جدول رمضان.
+
+يمكنك الوصول إليه من زر "العودة لجدول رمضان" أو عبر [tasbih.html](./tasbih.html).
+
+---
+
+## 💡 نصائح
+- **الطباعة**: استخدم زر 🖨️ طباعة الجدول (يفضل وضع Landscape).
+- **الوضع الليلي**: اضغط على زر 🌙 لتفعيل الوضع الليلي.
+- **إعادة تعيين**: زر 🔄 لإعادة تعيين الجدول (سيتم مسح جميع بياناتك).
+
+---
+
+## 🇺🇸 English Version (الإنجليزية)
 
 An interactive and simple web application to track your daily worship during Ramadan.
 
@@ -47,6 +67,9 @@ An interactive and simple web application to track your daily worship during Ram
 - **Live Progress Stats**: Monitor your completion rate and daily bests.
 - **Print Ready**: Optimized for physical copies (A4/A3 sizes).
 - **Last Ten Days**: Specially highlighted for motivation.
+- **New Tool: Tasbih & Adhkar App**: Dedicated app with interactive circles, customizable targets (33, 100, 1000), and auto-save.
+- **Dark Mode**: Toggle 🌙 for a comfortable night experience.
+- **Reset Option**: 🔄 to clear all your progress.
 
 ### Included Worships
 1. **Prayers**: Fajr, Dhuhr, Asr, Maghrib, Isha.
@@ -71,4 +94,3 @@ An interactive and simple web application to track your daily worship during Ram
 🌙 **Ramadan Kareem / رمضان كريم** 🌙
 
 </div>
-
