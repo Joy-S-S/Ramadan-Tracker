@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joy-s-s.github.io/Ramadan-Tracker/sitemap.xml
