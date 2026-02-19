@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المِسْبَحَةُ الرَّقَمِيَّةُ - أذكار وتسبيح</title>
+    <!-- Social Media Meta Tags -->
+    <meta name="description"
+        content="مسبحة رقمية تفاعلية لمتابعة الأذكار والتسبيح اليومي مع دعم للغتين العربية والإنجليزية.">
+    <meta property="og:title" content="المِسْبَحَةُ الرَّقَمِيَّةُ - أذكار وتسبيح">
+    <meta property="og:description" content="تابع أذكارك اليومية بسهولة مع خيارات تخصيص وتصميم إسلامي مميز.">
+    <meta property="og:image" content="https://joy-s-s.github.io/Ramadan-Tracker/masbaha.png">
+    <meta property="og:url" content="https://joy-s-s.github.io/Ramadan-Tracker/tasbih.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="المِسْبَحَةُ الرَّقَمِيَّةُ - أذكار وتسبيح">
+    <meta name="twitter:description" content="مسبحة إلكترونية ذكية تدعم الأذكار المخصصة وتتبع التقدم.">
+    <meta name="twitter:image" content="https://joy-s-s.github.io/Ramadan-Tracker/masbaha.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90N7S5Q8EE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-90N7S5Q8EE');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="masbaha.png">
+    <style>
+        :root {
+            --gold: #C6A84D;
+            --gold-light: #E8D48B;
+            --dark-green: #0D4D2B;
+            --green: #1A7A4A;
+            --light-green: #E8F5E9;
+            --cream: #FFF8E7;
+            --dark: #1a1a2e;
+            --accent: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0D4D2B 0%, #1a1a2e 50%, #0D4D2B 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 3px solid var(--gold);
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #0a3d22 50%, var(--dark-green) 100%);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 2px 10px rgba(198, 168, 77, 0.3);
+        }
+
+        /* ===== CONTROLS ===== */
+        .controls {
+            padding: 20px;
+            background: #f9f3e3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 2px solid var(--gold);
+            flex-wrap: wrap;
+        }
+
+        .target-selector {
+            display: flex;
+            background: white;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .target-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--dark-green);
+        }
+
+        .target-btn.active {
+            background: var(--gold);
+            color: var(--dark-green);
+        }
+
+        .target-btn:not(:last-child) {
+            border-left: 1px solid var(--gold);
+        }
+
+        .reset-all {
+            background: #8B0000;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reset-all:hover {
+            background: #a30000;
+            transform: scale(1.05);
+        }
+
+        /* ===== DHIKR GRID ===== */
+        .adhkar-grid {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            flex-grow: 1;
+            align-content: start;
+            justify-items: center;
+        }
+
+        .dhikr-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .dhikr-circle-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .dhikr-circle {
+            width: 180px;
+            height: 180px;
+            background: white;
+            border: 8px solid var(--light-green);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .dhikr-circle-container:active {
+            transform: scale(0.95) !important;
+        }
+
+        .dhikr-circle.completed {
+            /* No border change here to avoid double-ring with SVG */
+            box-shadow: 0 0 30px var(--gold-light);
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% {
+                box-shadow: 0 0 0 0 rgba(198, 168, 77, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(198, 168, 77, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(198, 168, 77, 0);
+            }
+        }
+
+        .dhikr-text {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-green);
+            line-height: 1.1;
+            margin-bottom: 8px;
+            max-width: 140px;
+        }
+
+        .dhikr-text.long {
+            font-size: 15px;
+        }
+
+        .dhikr-count-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: center;
+            gap: 6px;
+            line-height: 1;
+        }
+
+        .dhikr-count {
+            font-family: 'Cairo', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--green);
+        }
+
+        .target-mini {
+            font-size: 14px;
+            color: #888;
+            font-weight: 700;
+        }
+
+        /* SVG Progress Ring */
+        .progress-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotate(-90deg);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform-origin: 50% 50%;
+            stroke: var(--gold);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--gold);
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-top: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: white;
+            text-decoration: none;
+            background: var(--dark-green);
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-link:hover {
+            background: var(--green);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsive Updates */
+        @media (max-width: 768px) {
+            .adhkar-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px 10px;
+            }
+
+            .dhikr-circle-container {
+                width: 160px;
+                height: 160px;
+            }
+
+            .dhikr-circle {
+                width: 145px;
+                height: 145px;
+                border-width: 6px;
+                padding: 10px;
+            }
+
+            .dhikr-text {
+                font-size: 14px;
+                margin-bottom: 4px;
+            }
+
+            .dhikr-text.long {
+                font-size: 12px;
+            }
+
+            .dhikr-count {
+                font-size: 20px;
+            }
+
+            .target-mini {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .adhkar-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px 10px;
+            }
+
+            .dhikr-circle-container {
+                width: 160px;
+                height: 160px;
+            }
+
+            .dhikr-circle {
+                width: 145px;
+                height: 145px;
+                border-width: 6px;
+                padding: 10px;
+            }
+
+            .dhikr-text {
+                font-size: 14px;
+                margin-bottom: 4px;
+            }
+
+            .dhikr-text.long {
+                font-size: 12px;
+            }
+
+            .dhikr-count {
+                font-size: 20px;
+            }
+
+            .target-mini {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 410px) {
+            .dhikr-circle-container {
+                width: 145px;
+                height: 145px;
+            }
+
+            .dhikr-circle {
+                width: 130px;
+                height: 130px;
+                border-width: 5px;
+            }
+
+            .dhikr-text {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .adhkar-grid {
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .adhkar-grid {
+                gap: 8px;
+                padding: 10px 5px;
+            }
+
+            .dhikr-circle-container {
+                width: 130px;
+                height: 130px;
+            }
+
+            .dhikr-circle {
+                width: 115px;
+                height: 115px;
+            }
+        }
+
+        /* Custom Dhikr Spacing */
+        .dhikr-circle.empty {
+            border-style: dashed;
+            border-color: #ccc;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .dhikr-circle.empty .dhikr-text {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 10;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .dhikr-circle-container:hover .delete-btn {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .delete-btn {
+                opacity: 1;
+            }
+        }
+
+        /* Language Toggle & Nav Styles */
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .lang-btn,
+        .nav-btn-top {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--gold);
+            color: var(--gold-light);
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lang-btn:hover,
+        .nav-btn-top:hover {
+            background: var(--gold);
+            color: var(--dark-green);
+        }
+
+        [dir="ltr"] body {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <h1 class="main-title" data-i18n="mainTitle">المِسْبَحَةُ الرَّقَمِيَّةُ</h1>
+            <div class="lang-switch">
+                <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+                <a href="index.html" class="nav-btn-top" data-i18n="backLink">العودة للجدول</a>
+            </div>
+        </header>
+
+        <section class="controls">
+            <div style="font-weight: 800; color: var(--dark-green);" data-i18n="dailyTarget">الهدف اليومي:</div>
+            <div class="target-selector">
+                <button class="target-btn" onclick="setTarget(33)">33</button>
+                <button class="target-btn active" onclick="setTarget(100)">100</button>
+                <button class="target-btn" onclick="setTarget(1000)">1000</button>
+            </div>
+            <button class="reset-all" onclick="resetAll()" data-i18n="resetAll">تصفير الكل</button>
+        </section>
+
+        <main class="adhkar-grid" id="dhikrGrid">
+            <!-- Cards will be injected by JS -->
+        </main>
+
+        <footer class="footer">
+            <span data-i18n="footerQuote">« أَلا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ »</span>
+        </footer>
+    </div>
+
+    <script>
+        const dhikrList = [
+            { id: 'subhanallah', text: 'سبحان الله' },
+            { id: 'alhamdulillah', text: 'الحمد لله' },
+            { id: 'allahuakbar', text: 'الله أكبر' },
+            { id: 'lailahaillallah', text: 'لا إله إلا الله' },
+            { id: 'tasbih_full', text: 'سبحان الله وبحمده سبحان الله العظيم' },
+            { id: 'la_hawla', text: 'لا حول ولا قوة إلا بالله' },
+            { id: 'istighfar', text: 'أستغفر الله' },
+            { id: 'salawat', text: 'الصلاة على النبي ﷺ' }
+        ];
+
+        let currentTarget = parseInt(localStorage.getItem('tasbih_target')) || 100;
+        let counts = JSON.parse(localStorage.getItem('tasbih_counts')) || {};
+        let customAdhkar = JSON.parse(localStorage.getItem('tasbih_custom')) || [];
+        let currentLang = localStorage.getItem('tasbih_lang') || 'ar';
+
+        const translations = {
+            ar: {
+                bismillah: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                mainTitle: "المِسْبَحَةُ الرَّقَمِيَّةُ",
+                dailyTarget: "الهدف اليومي:",
+                resetAll: "تصفير الكل",
+                footerQuote: "« أَلا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ »",
+                backLink: "العودة لجدول رمضان",
+                addCustomPrompt: "أدخل نص الذكر الجديد:",
+                deleteConfirm: "هل تريد حذف هذا الذكر؟",
+                resetConfirm: "هل تريد تصفير جميع العدادات؟",
+                addBtnText: "+ إضافة ذكر مخصص",
+                langBtn: "English"
+            },
+            en: {
+                bismillah: "In the name of Allah, the Most Gracious, the Most Merciful",
+                mainTitle: "Digital Misbaha",
+                dailyTarget: "Daily Target:",
+                resetAll: "Reset All",
+                footerQuote: "“Verily, in the remembrance of Allah do hearts find rest”",
+                backLink: "Back to Ramadan Tracker",
+                addCustomPrompt: "Enter new Dhikr text:",
+                deleteConfirm: "Do you want to delete this Dhikr?",
+                resetConfirm: "Do you want to reset all counters?",
+                addBtnText: "+ Add Custom Dhikr",
+                langBtn: "عربي"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            localStorage.setItem('tasbih_lang', currentLang);
+            updateUI();
+        }
+
+        function updateUI() {
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langBtn').textContent = translations[currentLang].langBtn;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+            renderGrid();
+        }
+
+        function setTarget(t) {
+            currentTarget = t;
+            localStorage.setItem('tasbih_target', t);
+            document.querySelectorAll('.target-btn').forEach(btn => btn.classList.toggle('active', parseInt(btn.textContent) === t));
+            renderGrid();
+        }
+
+        function increment(id, isCustom = false) {
+            counts[id] = (counts[id] || 0) + 1;
+            localStorage.setItem('tasbih_counts', JSON.stringify(counts));
+            updateCircleUI(id);
+        }
+
+        function updateCircleUI(id) {
+            const count = counts[id] || 0;
+            const element = document.getElementById(`count-${id}`);
+            const circle = document.getElementById(`circle-${id}`);
+            const container = document.getElementById(`container-${id}`);
+            const ring = document.getElementById(`ring-${id}`);
+
+            if (element) element.textContent = count;
+            const progress = Math.min(count / currentTarget, 1);
+
+            // Dynamic scaling factor to prevent touching on mobile
+            const maxScale = window.innerWidth <= 400 ? 0.06 : 0.12;
+            if (container) container.style.transform = `scale(${1 + (progress * maxScale)})`;
+
+            if (ring) {
+                const radius = ring.r.baseVal.value;
+                const circumference = radius * 2 * Math.PI;
+                ring.style.strokeDashoffset = circumference - (progress * circumference);
+            }
+
+            if (circle) count >= currentTarget ? circle.classList.add('completed') : circle.classList.remove('completed');
+        }
+
+        function addCustomDhikr() {
+            const name = prompt(translations[currentLang].addCustomPrompt);
+            if (name && name.trim()) {
+                const id = 'custom_' + Date.now();
+                customAdhkar.push({ id, text: name.trim() });
+                saveCustom();
+                renderGrid();
+            }
+        }
+
+        function deleteCustom(id) {
+            if (confirm(translations[currentLang].deleteConfirm)) {
+                customAdhkar = customAdhkar.filter(a => a.id !== id);
+                delete counts[id];
+                saveCustom();
+                localStorage.setItem('tasbih_counts', JSON.stringify(counts));
+                renderGrid();
+            }
+        }
+
+        function saveCustom() {
+            localStorage.setItem('tasbih_custom', JSON.stringify(customAdhkar));
+        }
+
+        function resetAll() {
+            if (confirm(translations[currentLang].resetConfirm)) {
+                counts = {};
+                localStorage.setItem('tasbih_counts', JSON.stringify(counts));
+                renderGrid();
+            }
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('dhikrGrid');
+            grid.innerHTML = '';
+
+            const w = window.innerWidth;
+            let size = 200;
+            let stroke = 8;
+
+            if (w <= 350) {
+                size = 130;
+                stroke = 5;
+            } else if (w <= 410) {
+                size = 145;
+                stroke = 5;
+            } else if (w <= 768) {
+                size = 160;
+                stroke = 6;
+            }
+
+            const radius = (size / 2) - (stroke / 2);
+            const circumference = radius * 2 * Math.PI;
+
+            // Render Fixed List
+            dhikrList.forEach(dhikr => renderCircle(grid, dhikr, false, size, stroke, radius, circumference));
+
+            // Render Custom List
+            customAdhkar.forEach(dhikr => renderCircle(grid, dhikr, true, size, stroke, radius, circumference));
+
+            // Render Empty Slots (Always at least 2 empty shown if possible)
+            // But if all filled, add more.
+            // Simplified: Add 2 empty slots. If user uses one, it becomes real and re-render adds more.
+            for (let i = 0; i < 2; i++) {
+                const emptyCard = document.createElement('div');
+                emptyCard.className = 'dhikr-card';
+                emptyCard.innerHTML = `
+                    <div class="dhikr-circle-container" onclick="addCustomDhikr()">
+                        <div class="dhikr-circle empty">
+                            <div class="dhikr-text">${translations[currentLang].addBtnText}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(emptyCard);
+            }
+        }
+
+        function renderCircle(grid, dhikr, isCustom, size, stroke, radius, circumference) {
+            const count = counts[dhikr.id] || 0;
+            const card = document.createElement('div');
+            card.className = 'dhikr-card';
+            const textClass = dhikr.text.length > 20 ? 'dhikr-text long' : 'dhikr-text';
+
+            card.innerHTML = `
+                <div class="dhikr-circle-container" id="container-${dhikr.id}" onclick="increment('${dhikr.id}')">
+                    ${isCustom ? `<button class="delete-btn" onclick="event.stopPropagation(); deleteCustom('${dhikr.id}')">✕</button>` : ''}
+                    <svg class="progress-ring" width="${size}" height="${size}">
+                        <circle id="ring-${dhikr.id}" class="progress-ring__circle" stroke-width="${stroke}" 
+                            stroke-dasharray="${circumference} ${circumference}" stroke-dashoffset="${circumference}"
+                            stroke-linecap="round" fill="transparent" r="${radius}" cx="${size / 2}" cy="${size / 2}"/>
+                    </svg>
+                    <div class="dhikr-circle" id="circle-${dhikr.id}">
+                        <div class="${textClass}">${dhikr.text}</div>
+                        <div class="dhikr-count-wrapper">
+                            <div class="dhikr-count" id="count-${dhikr.id}">${count}</div>
+                            <div class="target-mini">/ ${currentTarget}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+            updateCircleUI(dhikr.id);
+        }
+
+        window.addEventListener('resize', renderGrid);
+        updateUI();
+    </script>
+</body>
+
+</html>
