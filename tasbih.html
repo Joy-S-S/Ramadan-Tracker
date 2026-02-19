@@ -56,6 +56,10 @@
             min-height: 100vh;
             color: #333;
             padding: 20px;
+            overscroll-behavior-y: none;
+            /* Prevent accidental pull-to-refresh bounce */
+            touch-action: manipulation;
+            /* Eliminate double-tap zoom delay */
         }
 
         .container {
@@ -743,7 +747,15 @@
             updateCircleUI(dhikr.id);
         }
 
-        window.addEventListener('resize', renderGrid);
+        let lastWidth = window.innerWidth;
+        window.addEventListener('resize', () => {
+            // Only re-render if the width actually changed
+            // This prevents jumping when mobile URL bars hide/show
+            if (window.innerWidth !== lastWidth) {
+                lastWidth = window.innerWidth;
+                renderGrid();
+            }
+        });
         updateUI();
     </script>
 </body>
