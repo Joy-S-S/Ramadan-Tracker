@@ -45,7 +45,7 @@
 - **حفظ تلقائي**: عدادك محفوظ دائماً.
 - **تصميم مريح**: يتماشى تماماً مع ثيم جدول رمضان.
 
-يمكنك الوصول إليه من زر "العودة لجدول رمضان" أو عبر [tasbih.html](./tasbih.html).
+يمكنك الوصول إليه من زر "المِسْبَحَةُ الرَّقَمِيَّةُ" أو عبر [tasbih.html](https://joy-s-s.github.io/Ramadan-Tracker/tasbih.html).
 
 ---
 
@@ -94,3 +94,4 @@ An interactive and simple web application to track your daily worship during Ram
 🌙 **Ramadan Kareem / رمضان كريم** 🌙
 
 </div>
+
