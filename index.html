@@ -1641,7 +1641,9 @@
             if (saved) {
                 const state = JSON.parse(saved);
                 Object.keys(state).forEach(key => {
-                    const [worship, day] = key.split('_');
+                    const parts = key.split('_');
+                    const day = parts.pop();
+                    const worship = parts.join('_');
                     const cell = document.querySelector(`.checkbox-cell[data-worship="${worship}"][data-day="${day}"]`);
                     if (cell) cell.classList.add('checked');
                 });
