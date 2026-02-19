@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مُتتبع الختمة - القرآن الكريم</title>
+    <!-- Social Media Meta Tags -->
+    <meta name="description"
+        content="أداة ذكية لمتابعة ختمة القرآن الكريم في رمضان، حساب الورد اليومي وتقسيمه على الصلوات.">
+    <meta property="og:title" content="مُتتبع الختمة - ختمة القرآن الكريم">
+    <meta property="og:description" content="نظم قراءتك للقرآن في رمضان بسهولة، حدد هدفك وتابع تقدمك اليومي.">
+    <meta property="og:image" content="https://joy-s-s.github.io/Ramadan-Tracker/icon.png">
+    <meta property="og:url" content="https://joy-s-s.github.io/Ramadan-Tracker/quran.html">
+    <meta property="og:type" content="website">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90N7S5Q8EE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-90N7S5Q8EE');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        :root {
+            --gold: #C6A84D;
+            --gold-light: #E8D48B;
+            --dark-green: #0D4D2B;
+            --green: #1A7A4A;
+            --light-green: #E8F5E9;
+            --cream: #FFF8E7;
+            --dark: #1a1a2e;
+            --accent: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0D4D2B 0%, #1a1a2e 50%, #0D4D2B 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+            overscroll-behavior-y: none;
+            touch-action: manipulation;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--cream);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border: 3px solid var(--gold);
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .lang-btn,
+        .nav-btn-top {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--gold);
+            color: var(--gold-light);
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lang-btn:hover,
+        .nav-btn-top:hover {
+            background: var(--gold);
+            color: var(--dark-green);
+        }
+
+        /* Controls Section */
+        .controls {
+            padding: 25px;
+            background-color: white;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .section-title {
+            color: var(--dark-green);
+            font-weight: 800;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .target-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .target-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #666;
+        }
+
+        .target-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark-green);
+            transform: scale(1.05);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--light-green);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--green);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--dark-green);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        /* Prayer Breakdown */
+        .prayer-breakdown {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px dashed var(--gold);
+        }
+
+        .prayer-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .prayer-item {
+            text-align: center;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            min-width: 80px;
+        }
+
+        .prayer-name {
+            font-size: 12px;
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .prayer-pages {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--dark-green);
+        }
+
+        /* Progress Tracker */
+        .progress-container {
+            padding: 25px;
+        }
+
+        .total-progress-bar {
+            height: 25px;
+            background: #eee;
+            border-radius: 12.5px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--accent));
+            width: 0%;
+            transition: width 0.5s ease-out;
+        }
+
+        .progress-text-top {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: var(--dark-green);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .page-input {
+            width: 100px;
+            padding: 12px;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: 900;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .quick-btn {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quick-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Juz Grid */
+        .juz-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .juz-card {
+            aspect-ratio: 1;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .juz-card.completed {
+            background: var(--gold);
+            border-color: var(--accent);
+            color: var(--dark-green);
+        }
+
+        .juz-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--dark-green);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .juz-num {
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        .juz-label {
+            font-size: 9px;
+            opacity: 0.8;
+            font-weight: 700;
+        }
+
+        .footer {
+            background: var(--dark-green);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            border-top: 3px solid var(--gold);
+        }
+
+        .footer-quote {
+            color: var(--gold-light);
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        [dir="ltr"] body {
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            .juz-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prayer-item {
+                flex: 1 1 30%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .juz-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .main-title {
+                font-size: 22px;
+            }
+
+            .lang-btn,
+            .nav-btn-top {
+                padding: 4px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <h1 class="main-title" data-i18n="mainTitle">مُتتبع ختمة القرآن</h1>
+            <div class="lang-switch">
+                <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+                <a href="tasbih.html" class="nav-btn-top" data-i18n="btnTasbih">المِسْبَحَةُ الرَّقَمِيَّةُ</a>
+                <a href="index.html" class="nav-btn-top" data-i18n="backLink">العودة لجدول رمضان</a>
+            </div>
+        </header>
+
+        <section class="controls">
+            <h2 class="section-title" data-i18n="targetTitle">عدد الختمات في رمضان:</h2>
+            <div class="target-selector">
+                <button class="target-btn" onclick="setKhatmaCount(1)">1</button>
+                <button class="target-btn active" onclick="setKhatmaCount(2)">2</button>
+                <button class="target-btn" onclick="setKhatmaCount(3)">3</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="dailyPages">40</div>
+                    <div class="stat-label" data-i18n="dailyPagesLabel">صفحة يومياً</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="remainingPages">604</div>
+                    <div class="stat-label" data-i18n="remainingPagesLabel">صفحة متبقية</div>
+                </div>
+            </div>
+
+            <div class="prayer-breakdown">
+                <div class="section-title" style="font-size: 14px; margin-bottom: 8px;" data-i18n="prayerDivide">الورد
+                    المقترح بعد كل صلاة:</div>
+                <div class="prayer-grid">
+                    <div class="prayer-item">
+                        <div class="prayer-name" data-i18n="fajr">الفجر</div>
+                        <div class="prayer-pages" id="p-fajr">8</div>
+                    </div>
+                    <div class="prayer-item">
+                        <div class="prayer-name" data-i18n="dhuhr">الظهر</div>
+                        <div class="prayer-pages" id="p-dhuhr">8</div>
+                    </div>
+                    <div class="prayer-item">
+                        <div class="prayer-name" data-i18n="asr">العصر</div>
+                        <div class="prayer-pages" id="p-asr">8</div>
+                    </div>
+                    <div class="prayer-item">
+                        <div class="prayer-name" data-i18n="maghrib">المغرب</div>
+                        <div class="prayer-pages" id="p-maghrib">8</div>
+                    </div>
+                    <div class="prayer-item">
+                        <div class="prayer-name" data-i18n="isha">العشاء</div>
+                        <div class="prayer-pages" id="p-isha">8</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="progress-container">
+            <div class="progress-text-top">
+                <span data-i18n="yourProgress">تقدمك الإجمالي:</span>
+                <span id="percentText">0%</span>
+            </div>
+            <div class="total-progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+                <button onclick="resetProgress()"
+                    style="background: none; border: none; color: #999; cursor: pointer; font-size: 11px; text-decoration: underline;"
+                    data-i18n="resetProgress">تصفير التقدم</button>
+            </div>
+
+            <div style="text-align: center; margin: 25px 0;">
+                <div style="font-size: 12px; font-weight: 700; color: #666; margin-bottom: 5px;"
+                    data-i18n="pagesCompleted">الصفحات المنجزة</div>
+                <div style="font-size: 32px; font-weight: 900; color: var(--dark-green); line-height: 1;">
+                    <span id="currentPageDisplay">0</span>
+                    <span style="font-size: 18px; color: #999; margin: 0 5px;">/</span>
+                    <span id="totalPagesDisplay" style="font-size: 20px; color: #666;">604</span>
+                </div>
+            </div>
+
+            <div class="juz-grid" id="juzGrid">
+                <!-- 30 Juz cards will be generated here -->
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-quote" data-i18n="footerQuote">« خياركم من تعلم القرآن وعلمه »</div>
+            <div data-i18n="footerMushaf">بناءً على صفحات مصحف المدينة (604 صفحة)</div>
+        </footer>
+    </div>
+
+    <script>
+        const TOTAL_PAGES = 604;
+        let khatmaTarget = parseInt(localStorage.getItem('quran_khatma_target')) || 1;
+        let fullKhatmas = parseInt(localStorage.getItem('quran_full_khatmas')) || 0;
+        let completedJuz = JSON.parse(localStorage.getItem('quran_completed_juz')) || [];
+        let currentPage = parseInt(localStorage.getItem('quran_current_page')) || 0;
+        let currentLang = localStorage.getItem('quran_lang') || 'ar';
+
+        const JUZ_PAGES = [
+            1, 22, 42, 62, 82, 102, 122, 142, 162, 182,
+            202, 222, 242, 262, 282, 302, 322, 342, 362, 382,
+            402, 422, 442, 462, 482, 502, 522, 542, 562, 582, 605
+        ];
+
+        const translations = {
+            ar: {
+                bismillah: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                mainTitle: "مُتتبع ختمة القرآن",
+                backLink: "العودة لجدول رمضان",
+                btnTasbih: "المِسْبَحَةُ الرَّقَمِيَّةُ",
+                targetTitle: "عدد الختمات في رمضان:",
+                dailyPagesLabel: "صفحة يومياً",
+                remainingPagesLabel: "صفحة متبقية",
+                prayerDivide: "الورد المقترح بعد كل صلاة:",
+                fajr: "الفجر", dhuhr: "الظهر", asr: "العصر", maghrib: "المغرب", isha: "العشاء",
+                yourProgress: "تقدمك الإجمالي:",
+                pagesCompleted: "الصفحات المنجزة",
+                footerQuote: "﴿ الَّذِينَ آَتَيْنَاهُمُ الْكِتَابَ يَتْلُونَهُ حَقَّ تِلَاوَتِهِ أُولَئِكَ يُؤْمِنُونَ بِهِ وَمَنْ يَكْفُرْ بِهِ فَأُولَئِكَ هُمُ الْخَاسِرُونَ ﴾ (سورة البقرة: 121).",
+                footerMushaf: "بناءً على صفحات مصحف المدينة (604 صفحة)",
+                juz: "جزء",
+                langBtn: "English",
+                resetProgress: "تصفير التقدم الحالي",
+                resetConfirm: "هل أنت متأكد من تصفير تقدمك في الختمة؟",
+                celebration: "تقبل الله منك! ✨ مبارك إتمام الختمة رقم ",
+                celebrationSub: "الآن بدأت رحلة الختمة التالية.. استعن بالله!",
+                targetReached: "🎉 مبارك! لقد أتممت هدفك الرمضاني بالكامل بنجاح. جعلها الله في ميزان حسناتك."
+            },
+            en: {
+                bismillah: "In the name of Allah, the Most Gracious, the Most Merciful",
+                mainTitle: "Quran Khatma Tracker",
+                backLink: "Back to Ramadan Tracker",
+                btnTasbih: "Digital Misbaha",
+                targetTitle: "Times to finish Quran in Ramadan:",
+                dailyPagesLabel: "Pages per Day",
+                remainingPagesLabel: "Pages Remaining",
+                prayerDivide: "Suggested pages after each prayer:",
+                fajr: "Fajr", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha",
+                yourProgress: "Total Progress:",
+                pagesCompleted: "Pages Completed",
+                footerQuote: "“Those to whom We have given the Book recite it with its true recital. They [are the ones who] believe in it.” (Al-Baqarah: 121)",
+                footerMushaf: "Based on Madina Mushaf (604 pages)",
+                juz: "Juz",
+                langBtn: "عربي",
+                resetProgress: "Reset current progress",
+                resetConfirm: "Are you sure you want to reset your khatma progress?",
+                celebration: "May Allah accept! ✨ Congrats on finishing Khatma #",
+                celebrationSub: "Now starting the next Khatma.. Keep it up!",
+                targetReached: "🎉 Congratulations! You have successfully completed your Ramadan goal. May Allah accept it from you."
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            localStorage.setItem('quran_lang', currentLang);
+            updateUI();
+        }
+
+        function updateUI() {
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langBtn').textContent = translations[currentLang].langBtn;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+
+            // Update Target Buttons
+            document.querySelectorAll('.target-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.textContent) === khatmaTarget);
+            });
+
+            calculateStats();
+            renderJuzGrid();
+        }
+
+        function setKhatmaCount(n) {
+            khatmaTarget = n;
+            localStorage.setItem('quran_khatma_target', n);
+            updateUI();
+        }
+
+        function calculateStats() {
+            // Calculate current page based on full khatmas + completed juz in current
+            let currentJuzPages = 0;
+            completedJuz.forEach(idx => {
+                currentJuzPages += (JUZ_PAGES[idx] - JUZ_PAGES[idx - 1]);
+            });
+
+            currentPage = (fullKhatmas * TOTAL_PAGES) + currentJuzPages;
+            localStorage.setItem('quran_current_page', currentPage);
+
+            const totalToRead = TOTAL_PAGES * khatmaTarget;
+            const daily = Math.ceil(totalToRead / 30);
+            const prayerPart = (daily / 5).toFixed(1);
+
+            document.getElementById('dailyPages').textContent = daily;
+            document.getElementById('remainingPages').textContent = Math.max(0, totalToRead - currentPage);
+
+            ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].forEach(p => {
+                document.getElementById(`p-${p}`).textContent = prayerPart;
+            });
+
+            const percent = Math.min(100, Math.floor((currentPage / totalToRead) * 100));
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('percentText').textContent = percent + '%';
+
+            document.getElementById('currentPageDisplay').textContent = currentPage;
+            document.getElementById('totalPagesDisplay').textContent = totalToRead;
+        }
+
+        function resetProgress() {
+            if (confirm(translations[currentLang].resetConfirm)) {
+                fullKhatmas = 0;
+                completedJuz = [];
+                currentPage = 0;
+                localStorage.setItem('quran_full_khatmas', 0);
+                localStorage.setItem('quran_completed_juz', JSON.stringify([]));
+                localStorage.setItem('quran_current_page', 0);
+                updateUI();
+            }
+        }
+
+        function renderJuzGrid() {
+            const grid = document.getElementById('juzGrid');
+            grid.innerHTML = '';
+
+            for (let i = 1; i <= 30; i++) {
+                const card = document.createElement('div');
+                card.className = 'juz-card';
+
+                if (completedJuz.includes(i)) {
+                    card.classList.add('completed');
+                }
+
+                card.innerHTML = `
+                    <div class="juz-num">${i}</div>
+                    <div class="juz-label">${translations[currentLang].juz}</div>
+                `;
+
+                card.onclick = () => {
+                    if (completedJuz.includes(i)) {
+                        completedJuz = completedJuz.filter(idx => idx !== i);
+                    } else {
+                        completedJuz.push(i);
+                    }
+
+                    localStorage.setItem('quran_completed_juz', JSON.stringify(completedJuz));
+
+                    // Check for Khatma Completion
+                    if (completedJuz.length === 30) {
+                        fullKhatmas++;
+                        localStorage.setItem('quran_full_khatmas', fullKhatmas);
+                        completedJuz = [];
+                        localStorage.setItem('quran_completed_juz', JSON.stringify([]));
+
+                        const isGoalReached = fullKhatmas >= khatmaTarget;
+                        const msg = isGoalReached ? translations[currentLang].targetReached :
+                            (translations[currentLang].celebration + fullKhatmas + "\n" + translations[currentLang].celebrationSub);
+
+                        alert(msg);
+                    }
+
+                    calculateStats();
+                    renderJuzGrid();
+                };
+
+                grid.appendChild(card);
+            }
+        }
+
+        // Initialize
+        updateUI();
+    </script>
+</body>
+
+</html>
