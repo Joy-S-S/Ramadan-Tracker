@@ -1227,32 +1227,6 @@
             }
         }
     </style>
-    <style>
-        /* ===== PERFORMANCE OPTIMIZATIONS ===== */
-        @media (max-width: 768px) {
-            .container {
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            }
-
-            .main-title,
-            .bismillah,
-            .crescent {
-                text-shadow: none;
-            }
-
-            .lang-switch button,
-            .lang-switch .nav-btn {
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-            }
-
-            /* Improve scrolling performance */
-            .table-wrapper {
-                -webkit-overflow-scrolling: touch;
-                will-change: scroll-position;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -1495,8 +1469,6 @@
             }
         ];
 
-        // Cache DOM elements that are freq accessed if possible, but for now this is fine.
-
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             localStorage.setItem('ramadan_lang', currentLang);
@@ -1533,20 +1505,14 @@
             updateStats();
         }
 
-        // Build table - Optimized with DocumentFragment
+        // Build table
         function buildTable() {
             const thead = document.querySelector('thead tr');
             const tbody = document.getElementById('tableBody');
 
-            // Header Activity Column
-            thead.innerHTML = '';
-            const thActivity = document.createElement('th');
-            thActivity.setAttribute('data-i18n', 'tableActivity');
-            thActivity.textContent = translations[currentLang].tableActivity;
-            thead.appendChild(thActivity);
-
-            // Fragment for headers
-            const headerFrag = document.createDocumentFragment();
+            // Clear previous items
+            thead.innerHTML = `<th data-i18n="tableActivity">${translations[currentLang].tableActivity}</th>`;
+            tbody.innerHTML = '';
 
             // Add day headers
             for (let d = 1; d <= DAYS; d++) {
@@ -1554,19 +1520,14 @@
                 th.className = 'day-header';
                 th.textContent = d;
                 if (d >= 21) th.style.background = 'linear-gradient(180deg, #5c3d00, #3d2800)';
-                headerFrag.appendChild(th);
+                thead.appendChild(th);
             }
 
             // Add total column
             const thTotal = document.createElement('th');
             thTotal.textContent = translations[currentLang].tableTotal;
             thTotal.style.minWidth = '55px';
-            headerFrag.appendChild(thTotal);
-            thead.appendChild(headerFrag);
-
-            // Body
-            tbody.innerHTML = '';
-            const bodyFrag = document.createDocumentFragment();
+            thead.appendChild(thTotal);
 
             // Build rows
             worshipData.forEach(cat => {
@@ -1577,7 +1538,7 @@
                 catTd.colSpan = DAYS + 2;
                 catTd.textContent = currentLang === 'ar' ? cat.category : cat.categoryEn;
                 catRow.appendChild(catTd);
-                bodyFrag.appendChild(catRow);
+                tbody.appendChild(catRow);
 
                 // Item rows
                 cat.items.forEach(item => {
@@ -1600,7 +1561,7 @@
                         cell.addEventListener('click', function () {
                             this.classList.toggle('checked');
                             saveState();
-                            requestAnimationFrame(updateStats);
+                            updateStats();
                         });
 
                         row.appendChild(cell);
@@ -1616,120 +1577,83 @@
                     totalCell.textContent = '0';
                     row.appendChild(totalCell);
 
-                    bodyFrag.appendChild(row);
+                    tbody.appendChild(row);
                 });
             });
-            tbody.appendChild(bodyFrag);
         }
 
-        // Stats - Optimized Logic
+        // Stats
         function updateStats() {
-            // 1. Single efficient DOM query for all checked items
-            const checkedCells = document.querySelectorAll('.checkbox-cell.checked');
-            const totalCells = DAYS * 20; // Approx, but safer to count if needed. 
-            // Better: dynamically count total checkboxes:
-            const allCheckboxesCount = document.querySelectorAll('.checkbox-cell').length;
-            const doneCount = checkedCells.length;
+            const allCells = document.querySelectorAll('.checkbox-cell');
+            const checked = document.querySelectorAll('.checkbox-cell.checked');
+            const total = allCells.length;
+            const done = checked.length;
 
-            // Updated Global Stats
-            document.getElementById('totalChecked').textContent = doneCount;
-            document.getElementById('totalPossible').textContent = allCheckboxesCount;
-            document.getElementById('overallPercent').textContent = (allCheckboxesCount > 0 ? Math.round((doneCount / allCheckboxesCount) * 100) : 0) + '%';
+            document.getElementById('totalChecked').textContent = done;
+            document.getElementById('totalPossible').textContent = total;
+            document.getElementById('overallPercent').textContent = (total > 0 ? Math.round((done / total) * 100) : 0) + '%';
 
-            // 2. Aggregate Data in Memory
-            const itemCounts = {};
-            const dayCounts = {};
-
-            // Initialize day buckets
-            for (let d = 1; d <= DAYS; d++) dayCounts[d] = 0;
-
-            checkedCells.forEach(cell => {
-                const wId = cell.dataset.worship;
-                const day = cell.dataset.day;
-
-                // Increment Item count
-                itemCounts[wId] = (itemCounts[wId] || 0) + 1;
-
-                // Increment Day count
-                dayCounts[day]++;
+            // Best day
+            let dayScores = {};
+            for (let d = 1; d <= DAYS; d++) dayScores[d] = 0;
+            checked.forEach(c => {
+                dayScores[c.dataset.day]++;
             });
-
-            // 3. Find Best Day
             let bestDay = '—';
             let bestScore = 0;
             for (let d = 1; d <= DAYS; d++) {
-                if (dayCounts[d] > bestScore) {
-                    bestScore = dayCounts[d];
+                if (dayScores[d] > bestScore) {
+                    bestScore = dayScores[d];
                     bestDay = d;
                 }
             }
             document.getElementById('bestDay').textContent = bestScore > 0 ? bestDay : '—';
 
-            // 4. Update UI (Row Totals & Progress)
-            // We iterate our data structure (which is small) instead of DOM
-            const progressData = [];
-
+            // Row totals
             worshipData.forEach(cat => {
-                let catChecked = 0;
-                let catTotal = cat.items.length * DAYS;
-
                 cat.items.forEach(item => {
-                    const count = itemCounts[item.id] || 0;
-                    catChecked += count;
-
-                    // Update Row Total Cell
+                    const itemChecked = document.querySelectorAll(`.checkbox-cell.checked[data-worship="${item.id}"]`).length;
                     const totalCell = document.querySelector(`.row-total[data-worship="${item.id}"]`);
                     if (totalCell) {
-                        totalCell.textContent = count + '/' + DAYS;
-                        const pct = count / DAYS;
-
-                        // Style update (color)
-                        // Using style.color directly causes reflow for that element, but minimized compared to before
-                        let color = '#999';
-                        if (pct >= 0.8) color = '#27ae60';
-                        else if (pct >= 0.5) color = '#f39c12';
-                        else if (pct > 0) color = '#e74c3c';
-
-                        if (totalCell.style.color !== color) totalCell.style.color = color;
+                        totalCell.textContent = itemChecked + '/' + DAYS;
+                        const pct = itemChecked / DAYS;
+                        if (pct >= 0.8) totalCell.style.color = '#27ae60';
+                        else if (pct >= 0.5) totalCell.style.color = '#f39c12';
+                        else if (pct > 0) totalCell.style.color = '#e74c3c';
+                        else totalCell.style.color = '#999';
                     }
-                });
-
-                // Prepare Data for Progress
-                progressData.push({
-                    name: currentLang === 'ar' ? cat.category : cat.categoryEn,
-                    pct: catTotal > 0 ? Math.round((catChecked / catTotal) * 100) : 0
                 });
             });
 
-            updateProgress(progressData);
+            updateProgress();
         }
 
-        function updateProgress(data) {
+        function updateProgress() {
             const grid = document.getElementById('progressGrid');
-
-            // If data not provided (initial call), calculate it (fallback or error)
-            // But we always call updateStats which calls this.
-            // For safety, if data is missing, we return or recalc (omitted for brevity as we control call sites)
-            if (!data) return;
-
-            // Only rebuild if meaningful change? 
-            // Simpler: Just rebuild using fragment to avoid layout resizing during build
             grid.innerHTML = '';
-            const frag = document.createDocumentFragment();
 
-            data.forEach(cat => {
+            worshipData.forEach(cat => {
+                let catTotal = 0;
+                let catChecked = 0;
+                cat.items.forEach(item => {
+                    catTotal += DAYS;
+                    catChecked += document.querySelectorAll(`.checkbox-cell.checked[data-worship="${item.id}"]`).length;
+                });
+
+                const pct = catTotal > 0 ? Math.round((catChecked / catTotal) * 100) : 0;
+                const catName = currentLang === 'ar' ? cat.category : cat.categoryEn;
+
                 const card = document.createElement('div');
                 card.className = 'progress-card';
                 card.innerHTML = `
-                    <h4>${cat.name}</h4>
+                    <h4>${catName}</h4>
                     <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" style="width: ${cat.pct}%"></div>
+                        <div class="progress-bar-fill" style="width: ${pct}%"></div>
                     </div>
-                    <div class="progress-percent">${cat.pct}%</div>
+                    <div class="progress-percent">${pct}%</div>
                 `;
-                frag.appendChild(card);
+                grid.appendChild(card);
             });
-            grid.appendChild(frag);
         }
 
         // Save/Load state
