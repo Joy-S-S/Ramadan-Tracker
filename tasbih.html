@@ -41,6 +41,7 @@
             --cream: #FFF8E7;
             --dark: #1a1a2e;
             --accent: #D4AF37;
+            --border: #B8860B;
         }
 
         * {
@@ -78,23 +79,68 @@
         /* ===== HEADER ===== */
         .header {
             background: linear-gradient(135deg, var(--dark-green) 0%, #0a3d22 50%, var(--dark-green) 100%);
-            padding: 30px;
+            padding: 40px 30px 30px;
             text-align: center;
-            border-bottom: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C6A84D' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
 
         .bismillah {
             font-family: 'Amiri', serif;
-            font-size: 24px;
+            font-size: 28px;
             color: var(--gold-light);
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(198, 168, 77, 0.3);
+        }
+
+        .crescent {
+            font-size: 50px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 15px rgba(198, 168, 77, 0.5));
         }
 
         .main-title {
-            font-size: 32px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 36px;
             font-weight: 900;
             color: var(--gold);
-            text-shadow: 0 2px 10px rgba(198, 168, 77, 0.3);
+            text-shadow: 0 2px 15px rgba(198, 168, 77, 0.4);
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .sub-title {
+            font-size: 18px;
+            color: var(--gold-light);
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--accent));
+            color: var(--dark-green);
+            padding: 5px 25px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 16px;
+            margin-top: 10px;
         }
 
         /* ===== CONTROLS ===== */
@@ -311,45 +357,51 @@
             transform: translateY(-2px);
         }
 
-        /* Mobile Responsive Updates */
-        @media (max-width: 768px) {
-            .adhkar-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                padding: 15px 10px;
-            }
+        html[lang="en"] body {
+            font-family: 'Amiri', serif;
+        }
 
-            .dhikr-circle-container {
-                width: 160px;
-                height: 160px;
-            }
-
-            .dhikr-circle {
-                width: 145px;
-                height: 145px;
-                border-width: 6px;
-                padding: 10px;
-            }
-
-            .dhikr-text {
-                font-size: 14px;
-                margin-bottom: 4px;
-            }
-
-            .dhikr-text.long {
-                font-size: 12px;
-            }
-
-            .dhikr-count {
-                font-size: 20px;
-            }
-
-            .target-mini {
-                font-size: 10px;
-            }
+        html[lang="en"] .main-title {
+            font-family: 'Cairo', sans-serif;
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                border-radius: 12px;
+                border-width: 2px;
+            }
+
+            .header {
+                padding: 25px 15px 20px;
+            }
+
+            .bismillah {
+                font-size: 20px;
+            }
+
+            .main-title {
+                font-size: 22px;
+                letter-spacing: 1px;
+            }
+
+            .sub-title {
+                font-size: 14px;
+            }
+
+            .year-badge {
+                font-size: 13px;
+                padding: 4px 18px;
+            }
+
+            .footer {
+                font-size: 11px;
+                padding: 10px;
+            }
+
             .adhkar-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
@@ -384,6 +436,71 @@
             .target-mini {
                 font-size: 10px;
             }
+
+            .delete-btn {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 4px;
+            }
+
+            .container {
+                border-radius: 8px;
+            }
+
+            .header {
+                padding: 18px 10px 15px;
+            }
+
+            .bismillah {
+                font-size: 17px;
+            }
+
+            .main-title {
+                font-size: 18px;
+                letter-spacing: 0;
+            }
+
+            .sub-title {
+                font-size: 12px;
+            }
+
+            .year-badge {
+                font-size: 11px;
+                padding: 3px 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header {
+                padding: 14px 8px 12px;
+            }
+
+            .bismillah {
+                font-size: 15px;
+            }
+
+            .main-title {
+                font-size: 16px;
+            }
+
+            .sub-title {
+                font-size: 11px;
+            }
+
+            .year-badge {
+                font-size: 10px;
+                padding: 2px 12px;
+            }
+
+            .footer {
+                font-size: 10px;
+                padding: 8px;
+            }
+
         }
 
         @media (max-width: 410px) {
@@ -471,16 +588,14 @@
 
         /* Language Toggle & Nav Styles */
         .lang-switch {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 15px;
+            margin: 15px 0 0;
+            text-align: center;
             position: relative;
             z-index: 100;
         }
 
-        .lang-btn,
-        .nav-btn-top {
+        .lang-switch button,
+        .lang-switch .nav-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid var(--gold);
             color: var(--gold-light);
@@ -493,15 +608,24 @@
             backdrop-filter: blur(5px);
             font-size: 14px;
             text-decoration: none;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 5px;
         }
 
-        .lang-btn:hover,
-        .nav-btn-top:hover {
+        .lang-switch button:hover,
+        .lang-switch .nav-btn:hover {
             background: var(--gold);
             color: var(--dark-green);
+        }
+
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0 0;
+            position: relative;
+            z-index: 100;
         }
 
         [dir="ltr"] body {
@@ -514,12 +638,18 @@
 
     <div class="container">
         <header class="header">
-            <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-            <h1 class="main-title" data-i18n="mainTitle">المِسْبَحَةُ الرَّقَمِيَّةُ</h1>
-            <div class="lang-switch">
-                <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
-                <a href="quran.html" class="nav-btn-top" data-i18n="btnQuran">مُتتبع الختمة</a>
-                <a href="index.html" class="nav-btn-top" data-i18n="backLink">العودة للجدول</a>
+            <div class="header-content">
+                <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <h1 class="main-title" data-i18n="mainTitle">المِسْبَحَةُ الرَّقَمِيَّةُ</h1>
+                <p class="sub-title" data-i18n="subTitle">أذكار وتسبيح لكل يوم في رمضان</p>
+                <div class="year-badge-container">
+                    <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
+                </div>
+                <div class="lang-switch">
+                    <button onclick="toggleLanguage()" id="langBtn">English</button>
+                    <a href="quran.html" class="nav-btn" data-i18n="btnQuran">مُتتبع الختمة</a>
+                    <a href="index.html" class="nav-btn" data-i18n="backLink">العودة للجدول</a>
+                </div>
             </div>
         </header>
 
@@ -563,11 +693,13 @@
             ar: {
                 bismillah: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
                 mainTitle: "المِسْبَحَةُ الرَّقَمِيَّةُ",
+                subTitle: "أذكار وتسبيح لكل يوم في رمضان",
+                yearBadge: "رمضان ١٤٤٧ هـ — ٢٠٢٦ م",
                 dailyTarget: "الهدف اليومي:",
                 resetAll: "تصفير الكل",
                 footerQuote: "« أَلا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ »",
-                backLink: "العودة لجدول رمضان",
-                btnQuran: "مُتتبع الختمة",
+                backLink: "الجدول",
+                btnQuran: "الختمة",
                 addCustomPrompt: "أدخل نص الذكر الجديد:",
                 deleteConfirm: "هل تريد حذف هذا الذكر؟",
                 resetConfirm: "هل تريد تصفير جميع العدادات؟",
@@ -577,11 +709,13 @@
             en: {
                 bismillah: "In the name of Allah, the Most Gracious, the Most Merciful",
                 mainTitle: "Digital Misbaha",
+                subTitle: "Daily Adhkar & Tasbih for Ramadan",
+                yearBadge: "Ramadan 1447 H — 2026 G",
                 dailyTarget: "Daily Target:",
                 resetAll: "Reset All",
                 footerQuote: "“Verily, in the remembrance of Allah do hearts find rest”",
-                backLink: "Back to Ramadan Tracker",
-                btnQuran: "Quran Tracker",
+                backLink: "Table",
+                btnQuran: "Khatma",
                 addCustomPrompt: "Enter new Dhikr text:",
                 deleteConfirm: "Do you want to delete this Dhikr?",
                 resetConfirm: "Do you want to reset all counters?",
