@@ -10,7 +10,7 @@
 
 ---
 
-## 🇪🇬 النسخة العربية (Arabic)
+## العربية (Arabic)
 
 تطبيق ويب بسيط وتفاعلي لتنظيم وتتبع عباداتك خلال شهر رمضان.
 
@@ -36,7 +36,7 @@
 
 ---
 
-## 🇺🇸 English Version (الإنجليزية)
+## English (الإنجليزية)
 
 An interactive and simple web application to track your daily worship during Ramadan.
 
@@ -71,3 +71,4 @@ An interactive and simple web application to track your daily worship during Ram
 🌙 **Ramadan Kareem / رمضان كريم** 🌙
 
 </div>
+
