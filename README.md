@@ -39,27 +39,33 @@
 
 ## 📿 المِسْبَحَةُ الرَّقَمِيَّةُ (Digital Misbaha App)
 
-أضفنا أداة جديدة مخصصة للأذكار والتسبيح اليومي بمميزات إبداعية:
+أداة مخصصة للأذكار والتسبيح اليومي بمميزات إبداعية:
 - **دوائر تفاعلية**: تكبر الدائرة كلما اقتربت من هدفك بشكل انسيابي.
 - **تخصيص الأهداف**: اختر بين 33، 100، أو 1000 تسبيحة.
 - **أذكار مخصصة**: يمكنك إضافة أذكارك الخاصة وحذفها بسهولة.
 - **دعم اللغتين**: واجهة كاملة بالعربية والإنجليزية مع الحفاظ على نص الذكر.
 - **حفظ تلقائي**: عدادك وتقدمك محفوظ دائماً في المتصفح.
 
-يمكنك الوصول إليه من زر "المِسْبَحَةُ الرَّقَمِيَّةُ" في الرأس أو عبر [tasbih.html](https://joy-s-s.github.io/Ramadan-Tracker/tasbih.html).
+يمكنك الوصول إليه عبر [tasbih.html](https://joy-s-s.github.io/Ramadan-Tracker/tasbih.html).
 
 ---
 
-## 💡 نصائح
-- **الطباعة**: استخدم زر 🖨️ طباعة الجدول (يفضل وضع Landscape).
-- **إعادة تعيين**: زر 🔄 لإعادة تعيين الجدول (سيتم مسح جميع بياناتك).
-- **الهواتف**: التطبيق مصمم ليعمل بسلاسة تامة على متصفحات الجوال.
+## 📖 مُتتبع ختمة القرآن (Quran Khatma Tracker)
+
+أداة متطورة لمساعدتك في التخطيط لختم القرآن الكريم في رمضان:
+- **حسابات دقيقة**: حساب الورد اليومي بناءً على عدد الختمات المستهدف (1، 2، أو 3).
+- **تقسيم الورد**: توزيع تلقائي لعدد الصفحات بعد كل صلاة (الفجر، الظهر، إلخ).
+- **قائمة الأجزاء مستقلة**: حدد الأجزاء التي قرأتها بأي ترتيب، وسيتم تحديث عدادك الإجمالي فوراً.
+- **تتبع الختمات المتعددة**: عند إتمام 30 جزء، تظهر تهنئة ويبدأ عداد الختمة التالية مع الحفاظ على إجمالي الصفحات.
+- **دقة المصحف**: يعتمد على تقسيم صفحات مصحف المدينة (604 صفحة).
+
+يمكنك الوصول إليه عبر [quran.html](https://joy-s-s.github.io/Ramadan-Tracker/quran.html).
 
 ---
 
 ## 🇺🇸 English Version (الإنجليزية)
 
-An interactive and simple web application to track your daily worship during Ramadan.
+An interactive and simple web application suite to track your daily worship during Ramadan.
 
 ### ✨ Features
 - **Full Bilingual Support**: Instant toggle between Arabic and English for all UI elements.
@@ -92,7 +98,28 @@ We added a dedicated tool for Adhkar and Daily Tasbih with creative features:
 - **Bilingual Interface**: Full Arabic/English UI while keeping Arabic Adhkar text.
 - **Persistent Data**: Your counters and custom entries are always saved.
 
-Access it via the "Digital Misbaha" button in the header or via [tasbih.html](https://joy-s-s.github.io/Ramadan-Tracker/tasbih.html).
+Access it via [tasbih.html](https://joy-s-s.github.io/Ramadan-Tracker/tasbih.html).
+
+---
+
+## 📖 Quran Khatma Tracker
+
+A specialized tool to help you plan and achieve your Quran completion goals:
+- **Dynamic Calculations**: Calculates daily requirements based on your target (1, 2, or 3 completions).
+- **Prayer Distribution**: Automatically breaks down pages into post-prayer targets.
+- **Independent Juz Checklist**: Mark any Juz as complete in any order, and the counter syncs instantly.
+- **Sequential Khatmas**: Congratulates you upon finishing 30 Juz and transitions to the next khatma while keeping your total page history.
+- **Professional Accuracy**: Based on the 604-page Madina Mushaf standard.
+
+Access it via [quran.html](https://joy-s-s.github.io/Ramadan-Tracker/quran.html).
+
+---
+
+## 💡 Tips / نصائح
+- **Navigation**: All tools are cross-linked in the header for a seamless experience.
+- **Printing**: Use the 🖨️ Print Tracker button (Landscape mode recommended).
+- **Reset**: The "Reset All" button clears your local progress for a fresh start.
+- **Mobile**: Fully responsive and optimized for both iOS and Android.
 
 ---
 
