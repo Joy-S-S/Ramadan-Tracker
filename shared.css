@@ -105,13 +105,19 @@ body {
 
 /* ===== YEAR BADGE ===== */
 .year-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    /* Match button height */
     background: linear-gradient(135deg, var(--gold), var(--accent));
     color: var(--dark-green);
-    padding: 5px 25px;
+    padding: 0 25px;
     border-radius: 20px;
     font-weight: 800;
     font-size: 16px;
+    box-sizing: border-box;
+    white-space: nowrap;
 }
 
 .year-badge-container {
@@ -126,8 +132,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
+    gap: 10px;
+    margin-top: 0;
+    /* Remove margin to align with badge */
 }
 
 /* ===== RADIO LINK (nav icon) ===== */
@@ -183,7 +190,8 @@ body {
 
 /* ===== PWA INSTALL LINK ===== */
 .install-link {
-    display: none; /* Hidden by default, shown via JS */
+    display: none;
+    /* Hidden by default, shown via JS */
     width: 38px;
     height: 38px;
     background: var(--green);
