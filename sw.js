@@ -1,5 +1,5 @@
 // Ramadan Tracker — Service Worker
-const CACHE_NAME = 'ramadan-tracker-v1';
+const CACHE_NAME = 'ramadan-tracker-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -37,6 +37,14 @@ self.addEventListener('activate', event => {
 // Fetch — cache-first for local assets, network-first for external resources
 self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
+
+    // FIX: Do NOT intercept streams (RadioJar, etc.)
+    // Streaming responses cannot be cloned or cached by standard SW fetch logic
+    if (url.origin.includes('radiojar.com') ||
+        event.request.destination === 'audio' ||
+        event.request.destination === 'video') {
+        return; // Let the browser handle it directly
+    }
 
     // For same-origin requests: cache-first
     if (url.origin === location.origin) {
