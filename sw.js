@@ -1,5 +1,5 @@
 // Ramadan Tracker — Service Worker
-const CACHE_NAME = 'ramadan-tracker-v2';
+const CACHE_NAME = 'ramadan-tracker-v3';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
