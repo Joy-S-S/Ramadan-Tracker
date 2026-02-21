@@ -332,11 +332,17 @@
                 <p class="sub-title" data-i18n="subTitle">تابع تلاوتك وأتمم ختمتك في رمضان</p>
                 <div class="year-badge-container">
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
-                    <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"
-                        aria-label="إذاعة القرآن الكريم">
-                        <i class="fas fa-radio"></i>
-                        <div class="radio-pulse"></div>
-                    </a>
+                    <div class="header-actions">
+                        <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"
+                            data-i18n-title="radioTitle">
+                            <i class="fas fa-radio"></i>
+                            <div class="radio-pulse"></div>
+                        </a>
+                        <button id="installBtn" class="install-link" title="تثبيت التطبيق"
+                            data-i18n-title="installTitle">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
                 </div>
                 <nav class="lang-switch" role="navigation" aria-label="التنقل">
                     <button onclick="toggleLanguage()" id="langBtn" aria-label="تبديل اللغة">English</button>
@@ -467,7 +473,9 @@
                 resetConfirm: "هل أنت متأكد من تصفير تقدمك في الختمة؟",
                 celebration: "تقبل الله منك! ✨ مبارك إتمام الختمة رقم ",
                 celebrationSub: "الآن بدأت رحلة الختمة التالية.. استعن بالله!",
-                targetReached: "🎉 مبارك! لقد أتممت هدفك الرمضاني بالكامل بنجاح. جعلها الله في ميزان حسناتك."
+                targetReached: "🎉 مبارك! لقد أتممت هدفك الرمضاني بالكامل بنجاح. جعلها الله في ميزان حسناتك.",
+                radioTitle: "إذاعة القرآن الكريم",
+                installTitle: "تثبيت التطبيق"
             },
             en: {
                 bismillah: "In the name of Allah, the Most Gracious, the Most Merciful",
@@ -491,7 +499,9 @@
                 resetConfirm: "Are you sure you want to reset your khatma progress?",
                 celebration: "May Allah accept! ✨ Congrats on finishing Khatma #",
                 celebrationSub: "Now starting the next Khatma.. Keep it up!",
-                targetReached: "🎉 Congratulations! You have successfully completed your Ramadan goal. May Allah accept it from you."
+                targetReached: "🎉 Congratulations! You have successfully completed your Ramadan goal. May Allah accept it from you.",
+                radioTitle: "Quran Radio",
+                installTitle: "Install App"
             }
         };
 
@@ -510,6 +520,14 @@
                 const key = el.getAttribute('data-i18n');
                 if (translations[currentLang][key]) {
                     el.textContent = translations[currentLang][key];
+                }
+            });
+
+            // Update titles
+            document.querySelectorAll('[data-i18n-title]').forEach(el => {
+                const key = el.getAttribute('data-i18n-title');
+                if (translations[currentLang][key]) {
+                    el.title = translations[currentLang][key];
                 }
             });
 
@@ -637,6 +655,34 @@
     </script>
 
     <script>
+        // PWA Installation Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installBtn) installBtn.style.display = 'flex';
+        });
+
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        deferredPrompt = null;
+                        installBtn.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            if (installBtn) installBtn.style.display = 'none';
+        });
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js').catch(() => { });
         }

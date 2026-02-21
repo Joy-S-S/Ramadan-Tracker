@@ -1001,10 +1001,15 @@
                 <p class="sub-title" data-i18n="subTitle">اللهم بلغنا رمضان وأعنا على صيامه وقيامه</p>
                 <div class="year-badge-container">
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
-                    <a href="radio.html" class="radio-link" title="إذاعة القران الكريم">
-                        <i class="fas fa-radio"></i>
-                        <div class="radio-pulse"></div>
-                    </a>
+                    <div class="header-actions">
+                        <a href="radio.html" class="radio-link" title="إذاعة القران الكريم" data-i18n-title="radioTitle">
+                            <i class="fas fa-radio"></i>
+                            <div class="radio-pulse"></div>
+                        </a>
+                        <button id="installBtn" class="install-link" title="تثبيت التطبيق" data-i18n-title="installTitle">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
                 </div>
                 <!-- LANGUAGE SWITCHER - CENTERED BELOW DATE -->
                 <nav class="lang-switch no-print" role="navigation" aria-label="التنقل الرئيسي">
@@ -1154,7 +1159,9 @@
                 bottomDua: "« اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي »",
                 bottomDuaRef: "دعاء ليلة القدر — رواه الترمذي",
                 footerText: "اجعل هذا الشهر نقطة تحول في حياتك — لا تضيع يومًا بدون عبادة",
-                resetConfirm: "هل أنت متأكد؟ سيتم مسح جميع البيانات المحفوظة"
+                resetConfirm: "هل أنت متأكد؟ سيتم مسح جميع البيانات المحفوظة",
+                radioTitle: "إذاعة القرآن الكريم",
+                installTitle: "تثبيت التطبيق"
             },
             en: {
                 bismillah: "In the name of Allah, the Most Gracious, the Most Merciful",
@@ -1185,7 +1192,9 @@
                 bottomDua: "“O Allah, You are Forgiving and love forgiveness, so forgive me”",
                 bottomDuaRef: "Laylat al-Qadr Dua — Narrated by At-Tirmidhi",
                 footerText: "Make this month a turning point in your life — don't waste a day without worship",
-                resetConfirm: "Are you sure? All saved data will be deleted."
+                resetConfirm: "Are you sure? All saved data will be deleted.",
+                radioTitle: "Quran Radio",
+                installTitle: "Install App"
             }
         };
 
@@ -1264,6 +1273,14 @@
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (translations[currentLang][key]) {
                     el.placeholder = translations[currentLang][key];
+                }
+            });
+
+            // Update titles
+            document.querySelectorAll('[data-i18n-title]').forEach(el => {
+                const key = el.getAttribute('data-i18n-title');
+                if (translations[currentLang][key]) {
+                    el.title = translations[currentLang][key];
                 }
             });
 
@@ -1506,6 +1523,34 @@
     </script>
 
     <script>
+        // PWA Installation Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installBtn) installBtn.style.display = 'flex';
+        });
+
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        deferredPrompt = null;
+                        installBtn.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            if (installBtn) installBtn.style.display = 'none';
+        });
+
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js').catch(() => { });

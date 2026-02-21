@@ -122,6 +122,14 @@ body {
     margin-top: 10px;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
 /* ===== RADIO LINK (nav icon) ===== */
 .radio-link {
     display: inline-flex;
@@ -171,6 +179,35 @@ body {
         transform: scale(1.8);
         opacity: 0;
     }
+}
+
+/* ===== PWA INSTALL LINK ===== */
+.install-link {
+    display: none; /* Hidden by default, shown via JS */
+    width: 38px;
+    height: 38px;
+    background: var(--green);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-light) !important;
+    text-decoration: none;
+    position: relative;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--gold);
+    cursor: pointer;
+}
+
+.install-link:hover {
+    transform: scale(1.1);
+    background: var(--dark-green);
+    border-color: var(--gold-light);
+}
+
+.install-link i {
+    font-size: 16px;
 }
 
 /* ===== LANGUAGE SWITCH & NAV ===== */

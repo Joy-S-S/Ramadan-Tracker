@@ -147,6 +147,11 @@
                 <p class="sub-title">استمع إلى كلام الله تعالى</p>
                 <div class="year-badge-container">
                     <span class="year-badge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
+                    <div class="header-actions">
+                        <button id="installBtn" class="install-link" title="تثبيت التطبيق">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
                 </div>
                 <nav class="lang-switch" role="navigation" aria-label="التنقل الرئيسي">
                     <a href="tasbih.html" class="nav-btn" aria-label="الأذكار">الأذكار</a>
@@ -178,6 +183,34 @@
     </div>
 
     <script>
+        // PWA Installation Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installBtn) installBtn.style.display = 'flex';
+        });
+
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        deferredPrompt = null;
+                        installBtn.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            if (installBtn) installBtn.style.display = 'none';
+        });
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js').catch(() => { });
         }
