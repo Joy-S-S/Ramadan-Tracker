@@ -1002,11 +1002,13 @@
                 <div class="year-badge-container">
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
                     <div class="header-actions">
-                        <a href="radio.html" class="radio-link" title="إذاعة القران الكريم" data-i18n-title="radioTitle">
+                        <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"
+                            data-i18n-title="radioTitle">
                             <i class="fas fa-radio"></i>
                             <div class="radio-pulse"></div>
                         </a>
-                        <button id="installBtn" class="install-link" title="تثبيت التطبيق" data-i18n-title="installTitle">
+                        <button id="installBtn" class="install-link" title="تثبيت التطبيق"
+                            data-i18n-title="installTitle">
                             <i class="fas fa-download"></i>
                         </button>
                     </div>
@@ -1527,10 +1529,24 @@
         let deferredPrompt;
         const installBtn = document.getElementById('installBtn');
 
+        function updateInstallIcon() {
+            if (!installBtn) return;
+            const icon = installBtn.querySelector('i');
+            const ua = navigator.userAgent.toLowerCase();
+            if (ua.includes('android')) {
+                icon.className = 'fab fa-android';
+            } else if (ua.includes('iphone') || ua.includes('ipad') || ua.includes('ipod') || (ua.includes('macintosh') && navigator.maxTouchPoints > 1)) {
+                icon.className = 'fab fa-apple';
+            }
+        }
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            if (installBtn) installBtn.style.display = 'flex';
+            if (installBtn) {
+                updateInstallIcon();
+                installBtn.style.display = 'flex';
+            }
         });
 
         if (installBtn) {
