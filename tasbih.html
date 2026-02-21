@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المِسْبَحَةُ الرَّقَمِيَّةُ - أذكار وتسبيح</title>
     <!-- Social Media Meta Tags -->
-    <meta name="description"
-        content="مسبحة رقمية تفاعلية لمتابعة الأذكار والتسبيح اليومي مع دعم للغتين العربية والإنجليزية.">
+    <meta name="description" content="مسبحة رقمية تفاعلية لمتابعة الأذكار والتسبيح اليومي بتصميم إسلامي مميز.">
     <meta property="og:title" content="المِسْبَحَةُ الرَّقَمِيَّةُ - أذكار وتسبيح">
     <meta property="og:description" content="تابع أذكارك اليومية بسهولة مع خيارات تخصيص وتصميم إسلامي مميز.">
     <meta property="og:image" content="https://joy-s-s.github.io/Ramadan-Tracker/masbaha.png">
@@ -15,7 +14,8 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="المِسْبَحَةُ الرَّقَمِيَّةُ - أذكار وتسبيح">
-    <meta name="twitter:description" content="مسبحة إلكترونية ذكية تدعم الأذكار المخصصة وتتبع التقدم.">
+    <meta name="twitter:description"
+        content="مسبحة إلكترونية ذكية تدعم الأذكار المخصصة وتتبع التقدم بتصميم إسلامي مميز.">
     <meta name="twitter:image" content="https://joy-s-s.github.io/Ramadan-Tracker/masbaha.png">
 
     <!-- Google tag (gtag.js) -->
@@ -883,7 +883,7 @@
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
                 </div>
                 <div class="lang-switch">
-                    <button onclick="toggleLanguage()" id="langBtn">English</button>
+                    <button onclick="toggleLanguage()" id="langBtn" style="display: none;">English</button>
                     <a href="quran.html" class="nav-btn" data-i18n="btnQuran">مُتتبع الختمة</a>
                     <a href="index.html" class="nav-btn" data-i18n="backLink">العودة للجدول</a>
                 </div>
@@ -1017,7 +1017,7 @@
         let currentTarget = parseInt(localStorage.getItem('tasbih_target')) || 100;
         let counts = JSON.parse(localStorage.getItem('tasbih_counts')) || {};
         let customAdhkar = JSON.parse(localStorage.getItem('tasbih_custom')) || [];
-        let currentLang = localStorage.getItem('tasbih_lang') || 'ar';
+        let currentLang = 'ar'; // Temporarily disabled: localStorage.getItem('tasbih_lang') || 'ar';
         let currentTab = 'misbaha';
 
         const translations = {
@@ -1044,7 +1044,7 @@
             },
             en: {
                 bismillah: "In the name of Allah, the Most Gracious, the Most Merciful",
-                mainTitle: "Digital Misbaha",
+                mainTitle: "Adhkar",
                 subTitle: "Daily Adhkar & Tasbih for Ramadan",
                 yearBadge: "Ramadan 1447 H — 2026 G",
                 dailyTarget: "Daily Target:",
