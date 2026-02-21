@@ -13,6 +13,9 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0D4D2B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>جدول تنظيم العبادة في رمضان</title>
     <meta name="description"
         content="جدول تفاعلي وشامل لتنظيم العبادات، تتبع الختمة، والأذكار اليومية خلال شهر رمضان المبارك ١٤٤٧ هـ.">
@@ -40,215 +43,17 @@
     </noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="stylesheet" href="shared.css">
     <style>
-        :root {
-            --gold: #C6A84D;
-            --gold-light: #E8D48B;
-            --dark-green: #0D4D2B;
-            --green: #1A7A4A;
-            --light-green: #E8F5E9;
-            --cream: #FFF8E7;
-            --dark: #1a1a2e;
-            --accent: #D4AF37;
-            --border: #B8860B;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #0D4D2B 0%, #1a1a2e 50%, #0D4D2B 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-
+        /* ===== INDEX-SPECIFIC OVERRIDES ===== */
         .container {
             max-width: 1400px;
-            margin: 0 auto;
-            background: var(--cream);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            border: 3px solid var(--gold);
         }
 
-        /* ===== HEADER ===== */
         .header {
-            background: linear-gradient(135deg, var(--dark-green) 0%, #0a3d22 50%, var(--dark-green) 100%);
-            padding: 40px 30px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
             min-height: 250px;
-            /* Preserve space to prevent CLS jump */
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C6A84D' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 28px;
-            color: var(--gold-light);
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(198, 168, 77, 0.3);
-        }
-
-        .crescent {
-            font-size: 50px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px rgba(198, 168, 77, 0.5));
-        }
-
-        .main-title {
-            font-family: 'Cairo', sans-serif;
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--gold);
-            text-shadow: 0 2px 15px rgba(198, 168, 77, 0.4);
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-
-        .sub-title {
-            font-size: 18px;
-            color: var(--gold-light);
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        .year-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--gold), var(--accent));
-            color: var(--dark-green);
-            padding: 5px 25px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 16px;
-        }
-
-        .year-badge-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .radio-link {
-            display: inline-flex;
-            width: 38px;
-            height: 38px;
-            background: var(--gold);
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-green) !important;
-            text-decoration: none;
-            position: relative;
-            z-index: 10;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--gold-light);
-        }
-
-        .radio-link:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: var(--gold-light);
-        }
-
-        .radio-link i {
-            font-size: 18px;
-        }
-
-        .radio-pulse {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            animation: radio-pulse-ani 2s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes radio-pulse-ani {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: scale(1.8);
-                opacity: 0;
-            }
-        }
-
-        /* ===== LANGUAGE SWITCH ===== */
-        .lang-switch {
-            margin: 15px 0 0;
-            text-align: center;
-            position: relative;
-            z-index: 100;
-        }
-
-        .lang-switch button,
-        .lang-switch .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--gold);
-            color: var(--gold-light);
-            padding: 5px 15px;
-            border-radius: 8px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .lang-switch button:hover,
-        .lang-switch .nav-btn:hover {
-            background: var(--gold);
-            color: var(--dark-green);
-        }
-
-        .lang-switch {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0 0;
-            position: relative;
-            z-index: 100;
-        }
-
-
-        html[lang="en"] body {
-            font-family: 'Amiri', serif;
-            /* Or another English font if preferred */
         }
 
         html[lang="en"] .info-field label,
@@ -803,42 +608,11 @@
             }
         }
 
-        /* ===== MOBILE RESPONSIVE ===== */
+        /* ===== MOBILE RESPONSIVE (index-specific) ===== */
         @media (max-width: 768px) {
-            body {
-                padding: 8px;
-            }
-
-            .container {
-                border-radius: 12px;
-                border-width: 2px;
-            }
-
-            .header {
-                padding: 25px 15px 20px;
-            }
-
-            .bismillah {
-                font-size: 20px;
-            }
-
             .crescent {
                 font-size: 36px;
                 margin-bottom: 6px;
-            }
-
-            .main-title {
-                font-size: 22px;
-                letter-spacing: 1px;
-            }
-
-            .sub-title {
-                font-size: 14px;
-            }
-
-            .year-badge {
-                font-size: 13px;
-                padding: 4px 18px;
             }
 
             .motivation {
@@ -992,39 +766,9 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 4px;
-            }
-
-            .container {
-                border-radius: 8px;
-            }
-
-            .header {
-                padding: 18px 10px 15px;
-            }
-
-            .bismillah {
-                font-size: 17px;
-            }
-
             .crescent {
                 font-size: 30px;
                 margin-bottom: 4px;
-            }
-
-            .main-title {
-                font-size: 18px;
-                letter-spacing: 0;
-            }
-
-            .sub-title {
-                font-size: 12px;
-            }
-
-            .year-badge {
-                font-size: 11px;
-                padding: 3px 14px;
             }
 
             .motivation p {
@@ -1106,29 +850,8 @@
         }
 
         @media (max-width: 360px) {
-            .header {
-                padding: 14px 8px 12px;
-            }
-
-            .bismillah {
-                font-size: 15px;
-            }
-
             .crescent {
                 font-size: 26px;
-            }
-
-            .main-title {
-                font-size: 16px;
-            }
-
-            .sub-title {
-                font-size: 11px;
-            }
-
-            .year-badge {
-                font-size: 10px;
-                padding: 2px 12px;
             }
 
             .info-section {
@@ -1201,7 +924,6 @@
                 margin-left: 2px;
             }
 
-
             .action-toolbar {
                 padding: 10px;
                 gap: 8px;
@@ -1265,13 +987,14 @@
 
 <body>
 
+    <a href="#main-content" class="skip-link">تخطي إلى المحتوى</a>
     <div class="container">
         <!-- PRINT ONLY TITLE -->
         <div class="print-only-title" data-i18n="printTitle" style="display: none;">جدول تنظيم العبادة في رمضان - ١٤٤٧
             هـ</div>
 
         <!-- HEADER -->
-        <div class="header">
+        <div class="header" role="banner">
             <div class="header-content">
                 <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
                 <h1 class="main-title" data-i18n="mainTitle">جدول تنظيم العبادة في رمضان</h1>
@@ -1284,11 +1007,13 @@
                     </a>
                 </div>
                 <!-- LANGUAGE SWITCHER - CENTERED BELOW DATE -->
-                <div class="lang-switch no-print">
-                    <button onclick="toggleLanguage()" id="langBtn">English</button>
-                    <a href="tasbih.html" class="nav-btn" data-i18n="btnTasbih">الأذكار</a>
-                    <a href="quran.html" class="nav-btn" data-i18n="btnQuran">مُتتبع الختمة</a>
-                </div>
+                <nav class="lang-switch no-print" role="navigation" aria-label="التنقل الرئيسي">
+                    <button onclick="toggleLanguage()" id="langBtn" aria-label="تبديل اللغة">English</button>
+                    <a href="tasbih.html" class="nav-btn" data-i18n="btnTasbih"
+                        aria-label="الأذكار والتسبيح">الأذكار</a>
+                    <a href="quran.html" class="nav-btn" data-i18n="btnQuran" aria-label="متتبع ختمة القرآن">مُتتبع
+                        الختمة</a>
+                </nav>
             </div>
         </div>
 
@@ -1349,44 +1074,49 @@
         </div>
 
         <!-- TABLE -->
-        <div class="table-wrapper">
-            <table id="worshipTable">
-                <thead>
-                    <tr>
-                        <th data-i18n="tableActivity">العبادة</th>
-                        <script>
-                            // Will be populated by JS
-                        </script>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                </tbody>
-            </table>
-        </div>
-
-        <!-- PROGRESS -->
-        <div class="progress-section no-print">
-            <h3 class="progress-title" data-i18n="progressTitle">متابعة التقدم</h3>
-            <div class="progress-grid" id="progressGrid">
+        <div id="main-content">
+            <div class="table-wrapper">
+                <table id="worshipTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="tableActivity">العبادة</th>
+                            <script>
+                                // Will be populated by JS
+                            </script>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
             </div>
-        </div>
 
-        <!-- ACTION TOOLBAR -->
-        <div class="action-toolbar no-print">
-            <button class="toolbar-btn print-btn" onclick="window.print()" data-i18n="btnPrint">طباعة الجدول</button>
-            <button class="toolbar-btn reset-btn" onclick="resetAll()" data-i18n="btnReset">إعادة تعيين الكل</button>
-        </div>
+            <!-- PROGRESS -->
+            <div class="progress-section no-print">
+                <h3 class="progress-title" data-i18n="progressTitle">متابعة التقدم</h3>
+                <div class="progress-grid" id="progressGrid">
+                </div>
+            </div>
 
-        <!-- DUA -->
-        <div class="dua-section">
-            <p data-i18n="bottomDua">« اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي »</p>
-            <span class="meaning" data-i18n="bottomDuaRef">دعاء ليلة القدر — رواه الترمذي</span>
-        </div>
+            <!-- ACTION TOOLBAR -->
+            <div class="action-toolbar no-print">
+                <button class="toolbar-btn print-btn" onclick="window.print()" data-i18n="btnPrint">طباعة
+                    الجدول</button>
+                <button class="toolbar-btn reset-btn" onclick="resetAll()" data-i18n="btnReset">إعادة تعيين
+                    الكل</button>
+            </div>
+
+            <!-- DUA -->
+            <div class="dua-section">
+                <p data-i18n="bottomDua">« اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي »</p>
+                <span class="meaning" data-i18n="bottomDuaRef">دعاء ليلة القدر — رواه الترمذي</span>
+            </div>
+
+        </div><!-- /main-content -->
 
         <!-- FOOTER -->
-        <div class="footer" data-i18n="footerText">
+        <footer class="footer" role="contentinfo" data-i18n="footerText">
             اجعل هذا الشهر نقطة تحول في حياتك — لا تضيع يومًا بدون عبادة
-        </div>
+        </footer>
     </div>
 
     <script>
@@ -1594,12 +1324,28 @@
                         cell.className = 'checkbox-cell';
                         cell.dataset.worship = item.id;
                         cell.dataset.day = d;
+                        cell.setAttribute('role', 'checkbox');
+                        cell.setAttribute('aria-checked', 'false');
+                        cell.setAttribute('tabindex', '0');
+                        cell.setAttribute('aria-label', (currentLang === 'ar' ? item.name : item.nameEn) + ' - ' + (currentLang === 'ar' ? 'يوم' : 'Day') + ' ' + d);
                         if (d >= 21) cell.classList.add('last-ten');
 
-                        cell.addEventListener('click', function () {
-                            this.classList.toggle('checked');
+                        function toggleCell(el) {
+                            el.classList.toggle('checked');
+                            el.setAttribute('aria-checked', el.classList.contains('checked') ? 'true' : 'false');
                             saveState();
                             updateStats();
+                        }
+
+                        cell.addEventListener('click', function () {
+                            toggleCell(this);
+                        });
+
+                        cell.addEventListener('keydown', function (e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                toggleCell(this);
+                            }
                         });
 
                         row.appendChild(cell);
@@ -1727,7 +1473,10 @@
                     const day = parts.pop();
                     const worship = parts.join('_');
                     const cell = document.querySelector(`.checkbox-cell[data-worship="${worship}"][data-day="${day}"]`);
-                    if (cell) cell.classList.add('checked');
+                    if (cell) {
+                        cell.classList.add('checked');
+                        cell.setAttribute('aria-checked', 'true');
+                    }
                 });
             }
         }
@@ -1737,7 +1486,10 @@
                 localStorage.removeItem('ramadan_tracker_2026');
                 localStorage.removeItem('ramadan_user_name');
                 localStorage.removeItem('ramadan_user_motivation');
-                document.querySelectorAll('.checkbox-cell.checked').forEach(c => c.classList.remove('checked'));
+                document.querySelectorAll('.checkbox-cell.checked').forEach(c => {
+                    c.classList.remove('checked');
+                    c.setAttribute('aria-checked', 'false');
+                });
                 document.getElementById('userName').value = '';
                 document.getElementById('userMotivation').value = '';
                 updateStats();
@@ -1751,6 +1503,13 @@
         // Initialize
         updateUI();
         loadUserInfo();
+    </script>
+
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').catch(() => { });
+        }
     </script>
 
 

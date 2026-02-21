@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0D4D2B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>المِسْبَحَةُ الرَّقَمِيَّةُ - أذكار وتسبيح</title>
     <!-- Social Media Meta Tags -->
     <meta name="description" content="مسبحة رقمية تفاعلية لمتابعة الأذكار والتسبيح اليومي بتصميم إسلامي مميز.">
@@ -32,173 +35,15 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="masbaha.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="masbaha.png">
+    <link rel="stylesheet" href="shared.css">
     <style>
-        :root {
-            --gold: #C6A84D;
-            --gold-light: #E8D48B;
-            --dark-green: #0D4D2B;
-            --green: #1A7A4A;
-            --light-green: #E8F5E9;
-            --cream: #FFF8E7;
-            --dark: #1a1a2e;
-            --accent: #D4AF37;
-            --border: #B8860B;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #0D4D2B 0%, #1a1a2e 50%, #0D4D2B 100%);
-            min-height: 100vh;
-            color: #333;
-            padding: 20px;
-            overscroll-behavior-y: none;
-            /* Prevent accidental pull-to-refresh bounce */
-            touch-action: manipulation;
-            /* Eliminate double-tap zoom delay */
-        }
-
+        /* ===== TASBIH-SPECIFIC OVERRIDES ===== */
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--cream);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            border: 3px solid var(--gold);
             display: flex;
             flex-direction: column;
             min-height: 90vh;
-        }
-
-        /* ===== HEADER ===== */
-        .header {
-            background: linear-gradient(135deg, var(--dark-green) 0%, #0a3d22 50%, var(--dark-green) 100%);
-            padding: 40px 30px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C6A84D' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 28px;
-            color: var(--gold-light);
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(198, 168, 77, 0.3);
-        }
-
-        .crescent {
-            font-size: 50px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px rgba(198, 168, 77, 0.5));
-        }
-
-        .main-title {
-            font-family: 'Cairo', sans-serif;
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--gold);
-            text-shadow: 0 2px 15px rgba(198, 168, 77, 0.4);
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-
-        .sub-title {
-            font-size: 18px;
-            color: var(--gold-light);
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        .year-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--gold), var(--accent));
-            color: var(--dark-green);
-            padding: 5px 25px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 16px;
-        }
-
-        .year-badge-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .radio-link {
-            display: inline-flex;
-            width: 38px;
-            height: 38px;
-            background: var(--gold);
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-green) !important;
-            text-decoration: none;
-            position: relative;
-            z-index: 10;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--gold-light);
-        }
-
-        .radio-link:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: var(--gold-light);
-        }
-
-        .radio-link i {
-            font-size: 18px;
-        }
-
-        .radio-pulse {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            animation: radio-pulse-ani 2s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes radio-pulse-ani {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: scale(1.8);
-                opacity: 0;
-            }
         }
 
         /* ===== CONTROLS ===== */
@@ -648,32 +493,6 @@
             }
         }
 
-        /* Language Toggle & Nav Styles */
-        .lang-switch {
-            margin: 15px 0 0;
-            text-align: center;
-            position: relative;
-            z-index: 100;
-        }
-
-        .lang-switch button,
-        .lang-switch .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--gold);
-            color: var(--gold-light);
-            padding: 5px 15px;
-            border-radius: 8px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
 
         /* Tabs Styles */
         .tabs-nav {
@@ -714,11 +533,6 @@
         }
 
 
-        .lang-switch button:hover,
-        .lang-switch .nav-btn:hover {
-            background: var(--gold);
-            color: var(--dark-green);
-        }
 
         .reset-adhkar-btn {
             background: rgba(255, 255, 255, 0.5);
@@ -759,14 +573,6 @@
             }
         }
 
-        .lang-switch {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0 0;
-            position: relative;
-            z-index: 100;
-        }
 
         /* Adhkar Card List Layout */
         .adhkar-list {
@@ -927,55 +733,65 @@
 </head>
 
 <body>
-
+    <a href="#main-content" class="skip-link">تخطي إلى المحتوى</a>
     <div class="container">
-        <header class="header">
+        <header class="header" role="banner">
             <div class="header-content">
-                <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                <h1 class="main-title" data-i18n="mainTitle">المِسْبَحَةُ الرَّقَمِيَّةُ</h1>
+                <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <h1 class="main-title" data-i18n="mainTitle">المِسْبَحَةُ الرَّقَمِيَّةُ</h1>
                 <p class="sub-title" data-i18n="subTitle">أذكار وتسبيح لكل يوم في رمضان</p>
                 <div class="year-badge-container">
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
-                    <a href="radio.html" class="radio-link" title="إذاعة القران الكريم">
+                    <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"
+                        aria-label="إذاعة القرآن الكريم">
                         <i class="fas fa-radio"></i>
                         <div class="radio-pulse"></div>
                     </a>
                 </div>
-                <div class="lang-switch">
-                    <button onclick="toggleLanguage()" id="langBtn" style="display: none;">English</button>
-                    <a href="quran.html" class="nav-btn" data-i18n="btnQuran">مُتتبع الختمة</a>
-                    <a href="index.html" class="nav-btn" data-i18n="backLink">العودة للجدول</a>
-                </div>
+                <nav class="lang-switch" role="navigation" aria-label="التنقل الرئيسي">
+                    <button onclick="toggleLanguage()" id="langBtn" style="display: none;"
+                        aria-label="تبديل اللغة">English</button>
+                    <a href="quran.html" class="nav-btn" data-i18n="btnQuran" aria-label="متتبع ختمة القرآن">مُتتبع
+                        الختمة</a>
+                    <a href="index.html" class="nav-btn" data-i18n="backLink" aria-label="العودة لجدول رمضان">العودة
+                        للجدول</a>
+                </nav>
             </div>
         </header>
 
-        <nav class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('misbaha')" data-i18n="tabMisbaha">المسبحة</button>
-            <button class="tab-btn" onclick="switchTab('morning')" data-i18n="tabMorning">أذكار الصباح</button>
-            <button class="tab-btn" onclick="switchTab('evening')" data-i18n="tabEvening">أذكار المساء</button>
-            <button class="tab-btn" onclick="switchTab('sleep')" data-i18n="tabSleep">أذكار النوم</button>
+        <nav class="tabs-nav" role="tablist" aria-label="أقسام الأذكار">
+            <button class="tab-btn active" onclick="switchTab('misbaha')" data-i18n="tabMisbaha" role="tab"
+                aria-selected="true">المسبحة</button>
+            <button class="tab-btn" onclick="switchTab('morning')" data-i18n="tabMorning" role="tab"
+                aria-selected="false">أذكار الصباح</button>
+            <button class="tab-btn" onclick="switchTab('evening')" data-i18n="tabEvening" role="tab"
+                aria-selected="false">أذكار المساء</button>
+            <button class="tab-btn" onclick="switchTab('sleep')" data-i18n="tabSleep" role="tab"
+                aria-selected="false">أذكار النوم</button>
         </nav>
 
-        <button id="resetAdhkarBtn" class="reset-adhkar-btn" onclick="resetAdhkar()">
+        <button id="resetAdhkarBtn" class="reset-adhkar-btn" onclick="resetAdhkar()" aria-label="تصفير عدادات الأذكار">
             <i class="fa-solid fa-rotate-left" style="margin-left: 5px;"></i>
             <span data-i18n="resetAdhkar">تصفير العدادات لهذه الصفحة</span>
         </button>
 
-        <section class="controls">
-            <div style="font-weight: 800; color: var(--dark-green);" data-i18n="dailyTarget">الهدف اليومي:</div>
-            <div class="target-selector">
-                <button class="target-btn" onclick="setTarget(33)">33</button>
-                <button class="target-btn active" onclick="setTarget(100)">100</button>
-                <button class="target-btn" onclick="setTarget(1000)">1000</button>
+        <section id="main-content" role="main">
+            <section class="controls" aria-label="إعدادات الهدف">
+                <div style="font-weight: 800; color: var(--dark-green);" data-i18n="dailyTarget">الهدف اليومي:</div>
+                <div class="target-selector" role="group" aria-label="اختر الهدف اليومي">
+                    <button class="target-btn" onclick="setTarget(33)" aria-label="هدف 33">33</button>
+                    <button class="target-btn active" onclick="setTarget(100)" aria-label="هدف 100">100</button>
+                    <button class="target-btn" onclick="setTarget(1000)" aria-label="هدف 1000">1000</button>
+                </div>
+            </section>
+
+            <div class="adhkar-grid" id="dhikrGrid">
+                <!-- Cards will be injected by JS -->
             </div>
         </section>
 
-        <main class="adhkar-grid" id="dhikrGrid">
-            <!-- Cards will be injected by JS -->
-        </main>
-
-        <footer class="footer">
-            <span data-i18n="footerQuote">« أَلا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ »</span>
+        <footer class="footer" role="contentinfo">
+            <span data-i18n="footerQuote">« أَلا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ »</span>
         </footer>
     </div>
 
@@ -1317,9 +1133,12 @@
             if (dhikr.text.length > 100) textClass += ' extra-long';
             else if (dhikr.text.length > 20) textClass += ' long';
 
+            const ariaLabel = `${dhikr.text} - ${translations[currentLang].dailyTarget} ${target}`;
+
             container.innerHTML = `
-                <div class="dhikr-circle-container" id="container-${dhikr.id}" onclick="increment('${dhikr.id}', ${target})">
-                    ${isCustom ? `<button class="delete-btn" onclick="event.stopPropagation(); deleteCustom('${dhikr.id}')">✕</button>` : ''}
+                <div class="dhikr-circle-container" id="container-${dhikr.id}" 
+                     role="button" tabindex="0" aria-label="${ariaLabel}">
+                    ${isCustom ? `<button class="delete-btn" onclick="event.stopPropagation(); deleteCustom('${dhikr.id}')" aria-label="حذف">✕</button>` : ''}
                     <svg class="progress-ring" width="${size}" height="${size}">
                         <circle id="ring-${dhikr.id}" class="progress-ring__circle" stroke-width="${stroke}" 
                             stroke-dasharray="${circumference} ${circumference}" stroke-dashoffset="${circumference}"
@@ -1334,6 +1153,16 @@
                     </div>
                 </div>
             `;
+
+            const circleContainer = container.querySelector('.dhikr-circle-container');
+            circleContainer.onclick = () => increment(dhikr.id, target);
+            circleContainer.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    increment(dhikr.id, target);
+                }
+            });
+
             grid.appendChild(container);
             updateCircleUI(dhikr.id, target);
         }
@@ -1342,7 +1171,9 @@
             const count = counts[dhikr.id] || 0;
             const card = document.createElement('div');
             card.className = 'zikr-card';
-            card.onclick = () => increment(dhikr.id, dhikr.target);
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-label', `${dhikr.text} - ${translations[currentLang].dailyTarget} ${dhikr.target}`);
 
             card.innerHTML = `
                 <div class="zikr-body">
@@ -1353,13 +1184,23 @@
                 <div class="zikr-footer">
                     <div class="zikr-source">${dhikr.source ? dhikr.source : ''}</div>
                     <div class="zikr-controls-left">
-                        <button class="counter-btn" id="btn-${dhikr.id}" style="pointer-events: none;">
+                        <button class="counter-btn" id="btn-${dhikr.id}" style="pointer-events: none;" tabindex="-1" aria-hidden="true">
                             <span id="count-${dhikr.id}">${count}</span>
                             <span class="btn-target">/ ${dhikr.target}</span>
                         </button>
                     </div>
                 </div>
             `;
+
+            const triggerIncrement = () => increment(dhikr.id, dhikr.target);
+            card.onclick = triggerIncrement;
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    triggerIncrement();
+                }
+            });
+
             grid.appendChild(card);
             updateCardUI(dhikr.id, dhikr.target);
         }
@@ -1376,7 +1217,11 @@
         switchTab('misbaha');
         updateUI();
     </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').catch(() => { });
+        }
+    </script>
 </body>
-
 
 </html>

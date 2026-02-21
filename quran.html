@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0D4D2B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>مُتتبع الختمة - القرآن الكريم</title>
     <!-- Social Media Meta Tags -->
     <meta name="description"
@@ -26,215 +29,17 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap"
         rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="stylesheet" href="shared.css">
     <style>
-        :root {
-            --gold: #C6A84D;
-            --gold-light: #E8D48B;
-            --dark-green: #0D4D2B;
-            --green: #1A7A4A;
-            --light-green: #E8F5E9;
-            --cream: #FFF8E7;
-            --dark: #1a1a2e;
-            --accent: #D4AF37;
-            --border: #B8860B;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #0D4D2B 0%, #1a1a2e 50%, #0D4D2B 100%);
-            min-height: 100vh;
-            color: #333;
-            padding: 20px;
-            overscroll-behavior-y: none;
-            touch-action: manipulation;
-        }
-
+        /* ===== QURAN-SPECIFIC STYLES ===== */
         .container {
             max-width: 800px;
-            margin: 0 auto;
-            background: var(--cream);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            border: 3px solid var(--gold);
         }
 
-        /* ===== HEADER ===== */
-        .header {
-            background: linear-gradient(135deg, var(--dark-green) 0%, #0a3d22 50%, var(--dark-green) 100%);
-            padding: 40px 30px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C6A84D' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 28px;
-            color: var(--gold-light);
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(198, 168, 77, 0.3);
-        }
-
-        .crescent {
-            font-size: 50px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px rgba(198, 168, 77, 0.5));
-        }
-
-        .main-title {
-            font-family: 'Cairo', sans-serif;
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--gold);
-            text-shadow: 0 2px 15px rgba(198, 168, 77, 0.4);
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-
-        .sub-title {
-            font-size: 18px;
-            color: var(--gold-light);
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        .year-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--gold), var(--accent));
-            color: var(--dark-green);
-            padding: 5px 25px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 16px;
-        }
-
-        .year-badge-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .radio-link {
-            display: inline-flex;
-            width: 38px;
-            height: 38px;
-            background: var(--gold);
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-green) !important;
-            text-decoration: none;
-            position: relative;
-            z-index: 10;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--gold-light);
-        }
-
-        .radio-link:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: var(--gold-light);
-        }
-
-        .radio-link i {
-            font-size: 18px;
-        }
-
-        .radio-pulse {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            animation: radio-pulse-ani 2s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes radio-pulse-ani {
-            0% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: scale(1.8);
-                opacity: 0;
-            }
-        }
-
-        /* ===== LANGUAGE SWITCH ===== */
-        .lang-switch {
-            margin: 15px 0 0;
-            text-align: center;
-            position: relative;
-            z-index: 100;
-        }
-
-        .lang-switch button,
-        .lang-switch .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--gold);
-            color: var(--gold-light);
-            padding: 5px 15px;
-            border-radius: 8px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .lang-switch button:hover,
-        .lang-switch .nav-btn:hover {
-            background: var(--gold);
-            color: var(--dark-green);
-        }
-
-        .lang-switch {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0 0;
-            position: relative;
-            z-index: 100;
-        }
-
-        /* Controls Section */
         .controls {
             padding: 25px;
             background: #f9f3e3;
@@ -481,46 +286,8 @@
             text-align: left;
         }
 
-        html[lang="en"] body {
-            font-family: 'Amiri', serif;
-        }
-
-        html[lang="en"] .main-title {
-            font-family: 'Cairo', sans-serif;
-        }
-
+        /* Quran-specific responsive */
         @media (max-width: 768px) {
-            body {
-                padding: 8px;
-            }
-
-            .container {
-                border-radius: 12px;
-                border-width: 2px;
-            }
-
-            .header {
-                padding: 25px 15px 20px;
-            }
-
-            .bismillah {
-                font-size: 20px;
-            }
-
-            .main-title {
-                font-size: 22px;
-                letter-spacing: 1px;
-            }
-
-            .sub-title {
-                font-size: 14px;
-            }
-
-            .year-badge {
-                font-size: 13px;
-                padding: 4px 18px;
-            }
-
             .footer {
                 font-size: 11px;
                 padding: 10px;
@@ -528,36 +295,6 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 4px;
-            }
-
-            .container {
-                border-radius: 8px;
-            }
-
-            .header {
-                padding: 18px 10px 15px;
-            }
-
-            .bismillah {
-                font-size: 17px;
-            }
-
-            .main-title {
-                font-size: 18px;
-                letter-spacing: 0;
-            }
-
-            .sub-title {
-                font-size: 12px;
-            }
-
-            .year-badge {
-                font-size: 11px;
-                padding: 3px 14px;
-            }
-
             .juz-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
@@ -572,27 +309,6 @@
         }
 
         @media (max-width: 360px) {
-            .header {
-                padding: 14px 8px 12px;
-            }
-
-            .bismillah {
-                font-size: 15px;
-            }
-
-            .main-title {
-                font-size: 16px;
-            }
-
-            .sub-title {
-                font-size: 11px;
-            }
-
-            .year-badge {
-                font-size: 10px;
-                padding: 2px 12px;
-            }
-
             .footer {
                 font-size: 10px;
                 padding: 8px;
@@ -601,31 +317,33 @@
             .juz-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
-
         }
     </style>
 </head>
 
 <body>
 
+    <a href="#main-content" class="skip-link">تخطي إلى المحتوى</a>
     <div class="container">
-        <header class="header">
+        <header class="header" role="banner">
             <div class="header-content">
-                <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <div class="bismillah" data-i18n="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
                 <h1 class="main-title" data-i18n="mainTitle">مُتتبع ختمة القرآن</h1>
                 <p class="sub-title" data-i18n="subTitle">تابع تلاوتك وأتمم ختمتك في رمضان</p>
                 <div class="year-badge-container">
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
-                    <a href="radio.html" class="radio-link" title="إذاعة القران الكريم">
+                    <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"
+                        aria-label="إذاعة القرآن الكريم">
                         <i class="fas fa-radio"></i>
                         <div class="radio-pulse"></div>
                     </a>
                 </div>
-                <div class="lang-switch">
-                    <button onclick="toggleLanguage()" id="langBtn">English</button>
-                    <a href="tasbih.html" class="nav-btn" data-i18n="btnTasbih">الأذكار</a>
-                    <a href="index.html" class="nav-btn" data-i18n="backLink">العودة لجدول رمضان</a>
-                </div>
+                <nav class="lang-switch" role="navigation" aria-label="التنقل">
+                    <button onclick="toggleLanguage()" id="langBtn" aria-label="تبديل اللغة">English</button>
+                    <a href="tasbih.html" class="nav-btn" data-i18n="btnTasbih" aria-label="الأذكار">الأذكار</a>
+                    <a href="index.html" class="nav-btn" data-i18n="backLink" aria-label="العودة لجدول رمضان">العودة
+                        لجدول رمضان</a>
+                </nav>
             </div>
         </header>
 
@@ -706,7 +424,7 @@
             </div>
         </main>
 
-        <footer class="footer">
+        <footer class="footer" role="contentinfo">
             <div class="footer-quote" data-i18n="footerQuote">« خياركم من تعلم القرآن وعلمه »</div>
             <div data-i18n="footerMushaf">بناءً على صفحات مصحف المدينة (604 صفحة)</div>
         </footer>
@@ -865,16 +583,21 @@
                     card.classList.add('completed');
                 }
 
+                card.setAttribute('role', 'checkbox');
+                card.setAttribute('aria-checked', completedJuz.includes(i) ? 'true' : 'false');
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('aria-label', translations[currentLang].juz + ' ' + i);
+
                 card.innerHTML = `
                     <div class="juz-num">${i}</div>
                     <div class="juz-label">${translations[currentLang].juz}</div>
                 `;
 
-                card.onclick = () => {
-                    if (completedJuz.includes(i)) {
-                        completedJuz = completedJuz.filter(idx => idx !== i);
+                function toggleJuz(juzNum) {
+                    if (completedJuz.includes(juzNum)) {
+                        completedJuz = completedJuz.filter(idx => idx !== juzNum);
                     } else {
-                        completedJuz.push(i);
+                        completedJuz.push(juzNum);
                     }
 
                     localStorage.setItem('quran_completed_juz', JSON.stringify(completedJuz));
@@ -895,7 +618,15 @@
 
                     calculateStats();
                     renderJuzGrid();
-                };
+                }
+
+                card.onclick = () => toggleJuz(i);
+                card.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleJuz(i);
+                    }
+                });
 
                 grid.appendChild(card);
             }
@@ -903,6 +634,12 @@
 
         // Initialize
         updateUI();
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').catch(() => { });
+        }
     </script>
 </body>
 
