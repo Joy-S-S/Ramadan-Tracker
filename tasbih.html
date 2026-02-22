@@ -21,14 +21,7 @@
         content="مسبحة إلكترونية ذكية تدعم الأذكار المخصصة وتتبع التقدم بتصميم إسلامي مميز.">
     <meta name="twitter:image" content="https://joy-s-s.github.io/Ramadan-Tracker/masbaha.png">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90N7S5Q8EE"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-90N7S5Q8EE');
-    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap"
@@ -743,6 +736,7 @@
                 <div class="year-badge-container">
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
                     <div class="header-actions">
+
                         <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"
                             data-i18n-title="radioTitle">
                             <i class="fas fa-radio"></i>
@@ -754,14 +748,7 @@
                         </button>
                     </div>
                 </div>
-                <nav class="lang-switch" role="navigation" aria-label="التنقل الرئيسي">
-                    <button onclick="toggleLanguage()" id="langBtn" style="display: none;"
-                        aria-label="تبديل اللغة">English</button>
-                    <a href="quran.html" class="nav-btn" data-i18n="btnQuran" aria-label="متتبع ختمة القرآن">مُتتبع
-                        الختمة</a>
-                    <a href="sunnah.html" class="nav-btn" data-i18n="btnSunnah" aria-label="السنن النبوية">السنن</a>
-                    <a href="index.html" class="nav-btn" data-i18n="backLink" aria-label="العودة لجدول رمضان">العودة
-                        للجدول</a>
+                <nav id="main-nav" class="lang-switch" role="navigation" aria-label="التنقل الرئيسي">
                 </nav>
             </div>
         </header>
@@ -899,7 +886,7 @@
         let currentTarget = parseInt(localStorage.getItem('tasbih_target')) || 100;
         let counts = JSON.parse(localStorage.getItem('tasbih_counts')) || {};
         let customAdhkar = JSON.parse(localStorage.getItem('tasbih_custom')) || [];
-        let currentLang = 'ar'; // Temporarily disabled: localStorage.getItem('tasbih_lang') || 'ar';
+        let currentLang = 'ar';
         let currentTab = 'misbaha';
 
         const translations = {
@@ -913,11 +900,12 @@
                 footerQuote: "« أَلا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ »",
                 backLink: "الجدول",
                 btnQuran: "الختمة",
+                btnSunnah: "السنن",
+                btnSalah: "الصلاة",
                 addCustomPrompt: "أدخل نص الذكر الجديد:",
                 deleteConfirm: "هل تريد حذف هذا الذكر؟",
                 resetConfirm: "هل تريد تصفير جميع العدادات؟",
                 addBtnText: "+ إضافة ذكر مخصص",
-                langBtn: "English",
                 tabMisbaha: "المسبحة",
                 tabMorning: "أذكار الصباح",
                 tabEvening: "أذكار المساء",
@@ -925,42 +913,12 @@
                 resetAdhkar: "تصفير عدادات هذه الصفحة",
                 radioTitle: "إذاعة القرآن الكريم",
                 installTitle: "تثبيت التطبيق"
-            },
-            en: {
-                bismillah: "In the name of Allah, the Most Gracious, the Most Merciful",
-                mainTitle: "Adhkar",
-                subTitle: "Daily Adhkar & Tasbih for Ramadan",
-                yearBadge: "Ramadan 1447 H — 2026 G",
-                dailyTarget: "Daily Target:",
-                resetAll: "Reset All",
-                footerQuote: "“Verily, in the remembrance of Allah do hearts find rest”",
-                backLink: "Table",
-                btnQuran: "Khatma",
-                addCustomPrompt: "Enter new Dhikr text:",
-                deleteConfirm: "Do you want to delete this Dhikr?",
-                resetConfirm: "Do you want to reset all counters?",
-                addBtnText: "+ Add Custom Dhikr",
-                langBtn: "عربي",
-                tabMisbaha: "Tasbih",
-                tabMorning: "Morning",
-                tabEvening: "Evening",
-                tabSleep: "Sleep",
-                resetAdhkar: "Reset counters for this page",
-                radioTitle: "Quran Radio",
-                installTitle: "Install App"
             }
         };
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            localStorage.setItem('tasbih_lang', currentLang);
-            updateUI();
-        }
-
         function updateUI() {
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.getElementById('langBtn').textContent = translations[currentLang].langBtn;
+            document.documentElement.lang = 'ar';
+            document.documentElement.dir = 'rtl';
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -1236,53 +1194,7 @@
         switchTab('misbaha');
         updateUI();
     </script>
-    <script>
-        // PWA Installation Logic
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
-
-        function updateInstallIcon() {
-            if (!installBtn) return;
-            const icon = installBtn.querySelector('i');
-            const ua = navigator.userAgent.toLowerCase();
-            if (ua.includes('android')) {
-                icon.className = 'fab fa-android';
-            } else if (ua.includes('iphone') || ua.includes('ipad') || ua.includes('ipod') || (ua.includes('macintosh') && navigator.maxTouchPoints > 1)) {
-                icon.className = 'fab fa-apple';
-            }
-        }
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (installBtn) {
-                updateInstallIcon();
-                installBtn.style.display = 'flex';
-            }
-        });
-
-        if (installBtn) {
-            installBtn.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    if (outcome === 'accepted') {
-                        deferredPrompt = null;
-                        installBtn.style.display = 'none';
-                    }
-                }
-            });
-        }
-
-        window.addEventListener('appinstalled', () => {
-            deferredPrompt = null;
-            if (installBtn) installBtn.style.display = 'none';
-        });
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js').catch(() => { });
-        }
-    </script>
+    <script src="shared.js"></script>
 </body>
 
 </html>

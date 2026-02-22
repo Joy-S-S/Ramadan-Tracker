@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0D4D2B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>كَيْفِيَّةُ الصَّلَاةِ الصَّحِيحَةِ</title>
+    <meta name="description"
+        content="دليل تعليمي شامل لكيفية الصلاة الصحيحة، مستمد من السنة النبوية، يشرح أركان الصلاة وواجباتها وسننها.">
+    <meta property="og:title" content="كَيْفِيَّةُ الصَّلَاةِ الصَّحِيحَةِ">
+    <meta property="og:description" content="دليل تعليمي شامل لكيفية الصلاة الصحيحة مع شرح الأركان والواجبات والسنن.">
+    <meta property="og:image" content="https://joy-s-s.github.io/Ramadan-Tracker/icon.png">
+    <meta property="og:url" content="https://joy-s-s.github.io/Ramadan-Tracker/salah.html">
+    <meta property="og:type" content="website">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* ===== SALAH-SPECIFIC STYLES ===== */
+        .container {
+            max-width: 900px;
+        }
+
+        /* --- Section Cards --- */
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin: 20px 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 2px solid rgba(198, 168, 77, 0.25);
+        }
+
+        .section-card:first-child {
+            margin-top: 25px;
+        }
+
+        .section-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.4rem;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            font-weight: 800;
+            border-bottom: 2px solid var(--gold-light);
+            padding-bottom: 10px;
+        }
+
+        /* --- Step Timeline --- */
+        .step-container {
+            position: relative;
+            padding-right: 40px;
+            margin-top: 25px;
+        }
+
+        .step-container::before {
+            content: '';
+            position: absolute;
+            right: 14px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--gold) 0%, rgba(198, 168, 77, 0.15) 100%);
+        }
+
+        .step-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-badge {
+            position: absolute;
+            right: -40px;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            color: var(--dark-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(198, 168, 77, 0.4);
+        }
+
+        .step-content {
+            background: #faf8f0;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(198, 168, 77, 0.15);
+        }
+
+        .step-name {
+            font-family: 'Cairo', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--dark-green);
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        /* --- Type Tags --- */
+        .type-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            font-family: 'Cairo', sans-serif;
+            background: var(--light-green);
+            color: var(--dark-green);
+        }
+
+        /* --- Adhkar/Dua Box --- */
+        .adhkar-box {
+            background: var(--cream);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 12px 0;
+            border: 1px solid rgba(198, 168, 77, 0.2);
+            text-align: center;
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--dark-green);
+            line-height: 1.6;
+        }
+
+        /* --- Image Frames --- */
+        .image-frame {
+            width: 100%;
+            max-width: 500px;
+            margin: 15px auto;
+            border-radius: 14px;
+            padding: 6px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid var(--gold-light);
+        }
+
+        .step-image {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+            min-height: 200px;
+            background: var(--light-green);
+        }
+
+        /* --- Classification Grid --- */
+        .classification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .classification-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(198, 168, 77, 0.2);
+        }
+
+        .classification-card h3 {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--dark-green);
+        }
+
+        .classification-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .classification-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .classification-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .classification-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* --- Prohibitions Grid --- */
+        .prohibitions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .prohibitions-section h4 {
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--gold-light);
+            color: var(--dark-green);
+        }
+
+        .prohibitions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prohibitions-list li {
+            margin-bottom: 10px;
+            padding-right: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+            position: relative;
+        }
+
+        .prohibitions-list li::before {
+            content: '–';
+            position: absolute;
+            right: 0;
+            color: var(--gold);
+        }
+
+        /* --- Info Tip Box --- */
+        .info-tip {
+            background: var(--cream);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #444;
+        }
+
+
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .section-card {
+                padding: 18px;
+                margin: 15px 10px;
+                border-radius: 14px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .step-container {
+                padding-right: 35px;
+            }
+
+            .step-badge {
+                right: -35px;
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+            }
+
+            .step-name {
+                font-size: 16px;
+            }
+
+            .step-content {
+                padding: 15px;
+            }
+
+            .arabic-text {
+                font-size: 1.3rem;
+            }
+
+            .classification-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .footer {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-card {
+                padding: 14px;
+                margin: 10px 6px;
+                border-radius: 12px;
+            }
+
+            .section-title {
+                font-size: 1.15rem;
+            }
+
+            .step-container {
+                padding-right: 30px;
+            }
+
+            .step-badge {
+                right: -30px;
+                width: 24px;
+                height: 24px;
+                font-size: 11px;
+            }
+
+            .step-name {
+                font-size: 15px;
+            }
+
+            .step-desc {
+                font-size: 14px;
+            }
+
+            .arabic-text {
+                font-size: 1.15rem;
+            }
+
+            .adhkar-box {
+                padding: 14px;
+            }
+
+            .image-frame {
+                padding: 4px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .section-card {
+                padding: 12px;
+                margin: 8px 4px;
+            }
+
+            .section-title {
+                font-size: 1.05rem;
+            }
+
+            .step-name {
+                font-size: 14px;
+            }
+
+            .step-desc {
+                font-size: 13px;
+            }
+
+            .arabic-text {
+                font-size: 1.05rem;
+            }
+
+            .classification-card {
+                padding: 14px;
+            }
+
+            .footer {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">تخطي إلى المحتوى</a>
+    <div class="container">
+        <header class="header" role="banner">
+            <div class="header-content">
+                <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <h1 class="main-title">كَيْفِيَّةُ الصَّلَاةِ</h1>
+                <p class="sub-title">دليل شامل مستمد من السنة النبوية لأركان الصلاة وواجباتها وسننها</p>
+                <div class="year-badge-container">
+                    <span class="year-badge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
+                    <div class="header-actions">
+                        <a href="radio.html" class="radio-link" title="إذاعة القران الكريم">
+                            <i class="fas fa-radio"></i>
+                            <div class="radio-pulse"></div>
+                        </a>
+                        <button id="installBtn" class="install-link" title="تثبيت التطبيق">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+                <nav id="main-nav" class="lang-switch" role="navigation" aria-label="التنقل الرئيسي">
+                </nav>
+            </div>
+        </header>
+
+        <main id="main-content" role="main">
+
+            <!-- ١. شروط وضوابط قبل الصلاة -->
+            <div class="section-card">
+                <h2 class="section-title">١. شروط وضوابط قبل الصلاة</h2>
+                <p class="step-desc">قبل الوقوف بين يدي الله عز وجل، يجب التأكد من تحقق الشروط التالية:</p>
+                <ul class="classification-list">
+                    <li><strong>الوضوء أو الغسل:</strong> الطهارة من الحدث الأصغر والأكبر.</li>
+                    <li><strong>ستر العورة:</strong> للرجل من السرة للركبة، وللمرأة كامل الجسد عدا الوجه والكفين.</li>
+                    <li><strong>استقبال القبلة:</strong> التوجه نحو الكعبة المشرفة.</li>
+                    <li><strong>اتخاذ سترة:</strong> (سنة) وضع شيء أمامك يمنع مرور الناس.</li>
+                </ul>
+                <div class="image-frame">
+                    <img src="salah/sutra.jpg" alt="السترة في الصلاة" class="step-image">
+                </div>
+            </div>
+
+            <!-- ٢. خطوات الصلاة -->
+            <div class="section-card">
+                <h2 class="section-title">٢. وصف الصلاة خطوة بخطوة</h2>
+                <div class="step-container">
+
+                    <!-- Step 1: تكبيرة الإحرام -->
+                    <div class="step-item">
+                        <div class="step-badge">1</div>
+                        <div class="step-content">
+                            <span class="type-tag tag-pillar">ركن</span>
+                            <h3 class="step-name">تكبيرة الإحرام</h3>
+                            <p class="step-desc">تستقبل القبلة وتنوي بقلبك، ثم ترفع يديك حذو منكبيك أو أذنيك وتقول:
+                            </p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">اللهُ أَكْبَرُ</span>
+                            </div>
+                            <div class="image-frame">
+                                <img src="salah/takbir.jpg" alt="تكبيرة الإحرام" class="step-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: الاستفتاح والفاتحة -->
+                    <div class="step-item">
+                        <div class="step-badge">2</div>
+                        <div class="step-content">
+                            <span class="type-tag tag-sunnah">سنة</span>
+                            <h3 class="step-name">دعاء الاستفتاح وقراءة الفاتحة</h3>
+                            <p class="step-desc">تضع يدك اليمنى على اليسرى على الصدر، ثم تقرأ دعاء الاستفتاح سراً:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ ، وَتَبَارَكَ
+                                    اسْمُكَ ، وَتَعَالَى جَدُّكَ ، وَلَا إِلَهَ غَيْرُكَ</span>
+                            </div>
+                            <p class="step-desc">ثم الاستعاذة والبسملة، وقراءة سورة الفاتحة (ركن)، ثم ما تيسر من
+                                القرآن.</p>
+                            <div class="image-frame">
+                                <img src="salah/standing.jpg" alt="وضع اليدين في القيام" class="step-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: الركوع -->
+                    <div class="step-item">
+                        <div class="step-badge">3</div>
+                        <div class="step-content">
+                            <span class="type-tag tag-pillar">ركن</span>
+                            <h3 class="step-name">الركوع</h3>
+                            <p class="step-desc">تكبر ثم تركع، وتجعل ظهرك مستوياً وتضع يديك على ركبتيك مفرجة الأصابع
+                                وتقول (٣ مرات):</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">سُبْحَانَ رَبِّيَ الْعَظِيمِ</span>
+                            </div>
+                            <div class="image-frame">
+                                <img src="salah/ruku.jpg" alt="الركوع" class="step-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: الرفع من الركوع -->
+                    <div class="step-item">
+                        <div class="step-badge">4</div>
+                        <div class="step-content">
+                            <span class="type-tag tag-wajib">واجب</span>
+                            <h3 class="step-name">الرفع من الركوع</h3>
+                            <p class="step-desc">ترفع رأسك من الركوع قائلاً:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ (للإمام والمنفرد)</span>
+                            </div>
+                            <p class="step-desc">وبعد الاعتدال تقول:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">رَبَّنَا وَلَكَ الْحَمْدُ</span>
+                            </div>
+                            <div class="image-frame">
+                                <img src="salah/rising.jpg" alt="الرفع من الركوع" class="step-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: السجود -->
+                    <div class="step-item">
+                        <div class="step-badge">5</div>
+                        <div class="step-content">
+                            <span class="type-tag tag-pillar">ركن</span>
+                            <h3 class="step-name">السجود</h3>
+                            <p class="step-desc">تكبر وتسجد على أعضائك السبعة (الجبهة والأنف، الكفان، الركبتان، أطراف
+                                القدمين)، وتجافي مرفقيك عن جنبيك وتقول (٣ مرات):
+                            </p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">سُبْحَانَ رَبِّيَ الْأَعْلَى</span>
+                            </div>
+                            <p class="step-desc">ثم تدعو الله بما شئت، قال ﷺ: «أَقْرَبُ مَا يَكُونُ الْعَبْدُ مِنْ
+                                رَبِّهِ وَهُوَ سَاجِدٌ فَأَكْثِرُوا الدُّعَاءَ» — رواه مسلم.</p>
+                            <div class="image-frame">
+                                <img src="salah/sujud.jpg" alt="السجود" class="step-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: الجلسة بين السجدتين -->
+                    <div class="step-item">
+                        <div class="step-badge">6</div>
+                        <div class="step-content">
+                            <span class="type-tag tag-wajib">واجب</span>
+                            <h3 class="step-name">الجلسة بين السجدتين</h3>
+                            <p class="step-desc">ترفع رأسك وتجلس مفترشاً رجلك اليسرى ناصباً اليمنى وتقول:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">رَبِّ اغْفِرْ لِي ، رَبِّ اغْفِرْ لِي</span>
+                            </div>
+                            <div class="image-frame">
+                                <img src="salah/sitting_between.jpg" alt="الجلسة بين السجدتين" class="step-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: التشهد الأول -->
+                    <div class="step-item">
+                        <div class="step-badge">7</div>
+                        <div class="step-content">
+                            <span class="type-tag">واجب</span>
+                            <h3 class="step-name">التشهد الأول</h3>
+                            <p class="step-desc">بعد السجدة الثانية من الركعة الثانية تجلس مفترشاً وتقرأ التشهد:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ،
+                                    السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ
+                                    عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا
+                                    اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ</span>
+                            </div>
+                            <p class="step-desc">ثم تقوم للركعة الثالثة مكبراً. وفي الصلاة الثنائية (الفجر) تكمل بالصلاة
+                                الإبراهيمية.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: التشهد الأخير والتسليم -->
+                    <div class="step-item">
+                        <div class="step-badge">8</div>
+                        <div class="step-content">
+                            <span class="type-tag">ركن</span>
+                            <h3 class="step-name">التشهد الأخير والتسليم</h3>
+                            <p class="step-desc">بعد الركعة الأخيرة تجلس متورّكاً (تُخرج رجلك اليسرى من تحت اليمنى وتجلس
+                                على مقعدتك)، وتقرأ التشهد كاملاً ثم الصلاة الإبراهيمية:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا
+                                    صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ،
+                                    اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى
+                                    إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ</span>
+                            </div>
+                            <p class="step-desc">ثم تستعيذ بالله من أربع قبل السلام:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ، وَمِنْ
+                                    عَذَابِ الْقَبْرِ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَمِنْ شَرِّ فِتْنَةِ
+                                    الْمَسِيحِ الدَّجَّالِ</span>
+                            </div>
+                            <p class="step-desc">ثم تسلم عن يمينك وعن شمالك قائلاً:</p>
+                            <div class="adhkar-box">
+                                <span class="arabic-text">السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ</span>
+                            </div>
+                            <div class="image-frame">
+                                <img src="salah/taslim.jpg" alt="التسليم" class="step-image">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ٣. أركان وواجبات الصلاة -->
+            <div class="section-card">
+                <h2 class="section-title">٣. أركان الصلاة وواجباتها</h2>
+                <div class="classification-grid">
+                    <div class="classification-card">
+                        <h3>الأركان (١٤ ركناً)</h3>
+                        <p class="classification-desc">لا تسقط عمداً ولا سهواً وتُبطل الصلاة بتركها:</p>
+                        <ul class="classification-list">
+                            <li>القيام مع القدرة</li>
+                            <li>تكبيرة الإحرام</li>
+                            <li>قراءة الفاتحة في كل ركعة</li>
+                            <li>الركوع</li>
+                            <li>الرفع من الركوع</li>
+                            <li>الاعتدال قائماً بعد الركوع</li>
+                            <li>السجود على الأعضاء السبعة</li>
+                            <li>الرفع من السجود</li>
+                            <li>الجلسة بين السجدتين</li>
+                            <li>الطمأنينة في جميع الأركان</li>
+                            <li>الترتيب بين الأركان</li>
+                            <li>التشهد الأخير</li>
+                            <li>الجلوس للتشهد الأخير</li>
+                            <li>التسليمتان</li>
+                        </ul>
+                    </div>
+                    <div class="classification-card">
+                        <h3>الواجبات (٨ واجبات)</h3>
+                        <p class="classification-desc">تبطل بتركها عمداً، وتُجبر بسجود السهو إن تركت نسياناً:</p>
+                        <ul class="classification-list">
+                            <li>جميع التكبيرات عدا تكبيرة الإحرام</li>
+                            <li>قول: سمع الله لمن حمده (للإمام والمنفرد)</li>
+                            <li>قول: ربنا ولك الحمد (للكل)</li>
+                            <li>قول: سبحان ربي العظيم في الركوع (مرة)</li>
+                            <li>قول: سبحان ربي الأعلى في السجود (مرة)</li>
+                            <li>قول: رب اغفر لي بين السجدتين (مرة)</li>
+                            <li>التشهد الأول</li>
+                            <li>الجلوس للتشهد الأول</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ٤. مكروهات ومبطلات -->
+            <div class="section-card">
+                <h2 class="section-title">٤. مكروهات ومبطلات الصلاة</h2>
+                <div class="prohibitions-grid">
+                    <div class="prohibitions-section">
+                        <h4>مكروهات (يُنقص الأجر)</h4>
+                        <ul class="prohibitions-list">
+                            <li>الالتفات اليسير لغير حاجة.</li>
+                            <li>العبث بالثياب أو البدن.</li>
+                            <li>تغطية الفم (اللثام).</li>
+                            <li>الصلاة بحضرة طعام يشتهيه.</li>
+                            <li>رفع البصر إلى السماء.</li>
+                            <li>التخصّر (وضع اليد على الخاصرة).</li>
+                            <li>السدل (إسدال الثوب بلا حاجة).</li>
+                            <li>الإقعاء (الجلوس على العقبين بين السجدتين).</li>
+                            <li>التثاؤب.</li>
+                        </ul>
+                    </div>
+                    <div class="prohibitions-section">
+                        <h4>مبطلات (تجب الإعادة)</h4>
+                        <ul class="prohibitions-list">
+                            <li>الكلام المتعمد لغير مصلحة الصلاة.</li>
+                            <li>الضحك (القهقهة).</li>
+                            <li>الأكل والشرب عمداً.</li>
+                            <li>الحدث (انتقاض الوضوء).</li>
+                            <li>كشف العورة عمداً.</li>
+                            <li>استدبار القبلة عمداً.</li>
+                            <li>ترك ركن أو شرط عمداً.</li>
+                            <li>الحركة الكثيرة المتوالية لغير ضرورة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ٥. سنن الصلاة -->
+            <div class="section-card">
+                <h2 class="section-title">٥. من سنن الصلاة</h2>
+                <p class="step-desc">هذه أفعال يُثاب فاعلها ولا يُعاقب تاركها، وردت عن النبي ﷺ:</p>
+                <ul class="classification-list">
+                    <li>رفع اليدين عند تكبيرة الإحرام وعند الركوع والرفع منه وعند القيام من التشهد الأول</li>
+                    <li>وضع اليد اليمنى على اليسرى على الصدر في القيام</li>
+                    <li>النظر إلى موضع السجود</li>
+                    <li>دعاء الاستفتاح</li>
+                    <li>التعوّذ والبسملة قبل الفاتحة</li>
+                    <li>قول «آمين» بعد الفاتحة</li>
+                    <li>قراءة سورة بعد الفاتحة في الركعتين الأوليين</li>
+                    <li>الجهر بالقراءة في الفجر والركعتين الأوليين من المغرب والعشاء</li>
+                    <li>الزيادة على المرة في تسبيح الركوع والسجود (السنة ثلاثاً)</li>
+                    <li>بسط الظهر في الركوع ووضع الكفين على الركبتين مفرجة الأصابع</li>
+                    <li>مجافاة المرفقين عن الجنبين في السجود ومباعدة البطن عن الفخذين</li>
+                    <li>جلسة الاستراحة (جلسة خفيفة بعد السجدة الثانية من الركعة الأولى والثالثة قبل القيام)</li>
+                    <li>الإشارة بالسبابة في التشهد وتحريكها عند الدعاء</li>
+                    <li>الافتراش في التشهد الأول والتورّك في التشهد الأخير</li>
+                    <li>الدعاء بعد الصلاة الإبراهيمية وقبل السلام</li>
+                </ul>
+            </div>
+
+            <!-- ٦. أذكار بعد الصلاة -->
+            <div class="section-card">
+                <h2 class="section-title">٦. أذكار بعد الصلاة</h2>
+                <p class="step-desc">كان النبي ﷺ إذا سلّم يقول:</p>
+                <div class="adhkar-box">
+                    <span class="arabic-text">أَسْتَغْفِرُ اللَّهَ (٣ مرات)، اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ
+                        السَّلَامُ تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ</span>
+                </div>
+                <p class="step-desc" style="margin-top: 12px;">ثم يقول:</p>
+                <div class="adhkar-box">
+                    <span class="arabic-text">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ
+                        الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ، لَا
+                        إِلَهَ إِلَّا اللَّهُ وَلَا نَعْبُدُ إِلَّا إِيَّاهُ، لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ وَلَهُ
+                        الثَّنَاءُ الْحَسَنُ، لَا إِلَهَ إِلَّا اللَّهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ
+                        الْكَافِرُونَ</span>
+                </div>
+                <p class="step-desc" style="margin-top: 12px;">ثم التسبيح:</p>
+                <ul class="classification-list">
+                    <li>سبحان الله (٣٣ مرة)</li>
+                    <li>الحمد لله (٣٣ مرة)</li>
+                    <li>الله أكبر (٣٣ مرة)</li>
+                    <li>ويتم المئة بقول: لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير</li>
+                </ul>
+                <p class="step-desc" style="margin-top: 12px;">ويقرأ آية الكرسي وسورة الإخلاص والمعوذتين — رواه مسلم
+                    والنسائي.</p>
+            </div>
+
+            <!-- ٧. حديث صفة الصلاة -->
+            <div class="section-card">
+                <h2 class="section-title">٧. حديث النبي ﷺ</h2>
+                <div class="adhkar-box">
+                    <span class="arabic-text">«صَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي»</span>
+                </div>
+                <p class="step-desc" style="margin-top: 8px; text-align: center;">رواه البخاري</p>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="shared.js"></script>
+</body>
+
+</html>

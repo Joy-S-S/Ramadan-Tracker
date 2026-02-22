@@ -164,8 +164,11 @@
                 <h1 class="main-title" data-i18n="mainTitle">السنن النبوية</h1>
                 <p class="sub-title" data-i18n="subTitle">يوميات المسلم في إحياء سنة المصطفى ﷺ</p>
                 <div class="year-badge-container">
+                    <button onclick="toggleLanguage()" id="langBtn" class="lang-toggle" aria-label="تبديل اللغة"
+                        title="English">EN</button>
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
                     <div class="header-actions">
+
                         <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"><i class="fas fa-radio"></i>
                             <div class="radio-pulse"></div>
                         </a>
@@ -173,11 +176,7 @@
                                 class="fas fa-download"></i></button>
                     </div>
                 </div>
-                <nav class="lang-switch">
-                    <button onclick="toggleLanguage()" id="langBtn">English</button>
-                    <a href="index.html" class="nav-btn" data-i18n="btnHome">الجدول</a>
-                    <a href="quran.html" class="nav-btn" data-i18n="btnQuran">الختمة</a>
-                    <a href="tasbih.html" class="nav-btn" data-i18n="btnTasbih">الأذكار</a>
+                <nav id="main-nav" class="lang-switch" role="navigation" aria-label="التنقل الرئيسي">
                 </nav>
             </div>
         </header>
@@ -379,7 +378,10 @@
                 mainTitle: "السنن النبوية",
                 subTitle: "يوميات المسلم في إحياء سنة المصطفى ﷺ",
                 yearBadge: "رمضان ١٤٤٧ هـ — ٢٠٢٦ م",
-                btnHome: "الجدول", btnQuran: "الختمة", btnTasbih: "الأذكار",
+                btnHome: "الجدول",
+                btnQuran: "الختمة",
+                btnSalah: "الصلاة",
+                btnTasbih: "الأذكار",
                 tabWaking: "الاستيقاظ", tabFriday: "يوم الجمعة", tabFasting: "الصيام", tabWudu: "الوضوء", tabPrayer: "الصلاة", tabMosque: "المسجد",
                 tabFood: "الطعام", tabHome: "المنزل", tabDressing: "اللباس", tabSocial: "المجالس", tabEthics: "الأخلاق",
                 tabTravel: "السفر", tabNature: "الطبيعة", tabKnowledge: "العلم", tabSleep: "النوم", tabForgotten: "سنن مهجورة"
@@ -389,7 +391,10 @@
                 mainTitle: "Sunnah Tracker",
                 subTitle: "Daily practices to revive the Sunnah of the Prophet ﷺ",
                 yearBadge: "Ramadan 1447 H — 2026 G",
-                btnHome: "Schedule", btnQuran: "Khatma", btnTasbih: "Adhkar",
+                btnHome: "Tracker",
+                btnQuran: "Khatma",
+                btnSalah: "Salah Guide",
+                btnTasbih: "Adhkar",
                 tabWaking: "Waking", tabFriday: "Friday", tabFasting: "Fasting", tabWudu: "Wudu", tabPrayer: "Prayer", tabMosque: "Mosque",
                 tabFood: "Food", tabHome: "Home", tabDressing: "Dressing", tabSocial: "Social", tabEthics: "Ethics",
                 tabTravel: "Travel", tabNature: "Nature", tabKnowledge: "Knowledge", tabSleep: "Sleep", tabForgotten: "Forgotten"
@@ -399,7 +404,7 @@
         function updateUI() {
             document.documentElement.lang = currentLang;
             document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.getElementById('langBtn').textContent = currentLang === 'ar' ? 'English' : 'عربي';
+            document.getElementById('langBtn').textContent = currentLang === 'ar' ? 'EN' : '\u0639';
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -447,6 +452,7 @@
 
         updateUI();
     </script>
+    <script src="shared.js"></script>
 </body>
 
 </html>

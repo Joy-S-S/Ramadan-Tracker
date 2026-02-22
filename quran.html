@@ -17,14 +17,7 @@
     <meta property="og:url" content="https://joy-s-s.github.io/Ramadan-Tracker/quran.html">
     <meta property="og:type" content="website">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90N7S5Q8EE"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-90N7S5Q8EE');
-    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap"
@@ -331,6 +324,8 @@
                 <h1 class="main-title" data-i18n="mainTitle">مُتتبع ختمة القرآن</h1>
                 <p class="sub-title" data-i18n="subTitle">تابع تلاوتك وأتمم ختمتك في رمضان</p>
                 <div class="year-badge-container">
+                    <button onclick="toggleLanguage()" id="langBtn" class="lang-toggle" aria-label="تبديل اللغة"
+                        title="English">EN</button>
                     <span class="year-badge" data-i18n="yearBadge">رمضان ١٤٤٧ هـ — ٢٠٢٦ م</span>
                     <div class="header-actions">
                         <a href="radio.html" class="radio-link" title="إذاعة القران الكريم"
@@ -344,12 +339,7 @@
                         </button>
                     </div>
                 </div>
-                <nav class="lang-switch" role="navigation" aria-label="التنقل">
-                    <button onclick="toggleLanguage()" id="langBtn" aria-label="تبديل اللغة">English</button>
-                    <a href="tasbih.html" class="nav-btn" data-i18n="btnTasbih" aria-label="الأذكار">الأذكار</a>
-                    <a href="sunnah.html" class="nav-btn" data-i18n="btnSunnah" aria-label="السنن النبوية">السنن</a>
-                    <a href="index.html" class="nav-btn" data-i18n="backLink" aria-label="العودة لجدول رمضان">العودة
-                        للجدول</a>
+                <nav id="main-nav" class="lang-switch" role="navigation" aria-label="التنقل الرئيسي">
                 </nav>
             </div>
         </header>
@@ -459,6 +449,8 @@
                 yearBadge: "رمضان ١٤٤٧ هـ — ٢٠٢٦ م",
                 backLink: "الجدول",
                 btnTasbih: "الأذكار",
+                btnSunnah: "السنن",
+                btnSalah: "صفة الصلاة",
                 targetTitle: "عدد الختمات في رمضان:",
                 dailyPagesLabel: "صفحة يومياً",
                 remainingPagesLabel: "صفحة متبقية",
@@ -469,7 +461,7 @@
                 footerQuote: "﴿ الَّذِينَ آَتَيْنَاهُمُ الْكِتَابَ يَتْلُونَهُ حَقَّ تِلَاوَتِهِ أُولَئِكَ يُؤْمِنُونَ بِهِ وَمَنْ يَكْفُرْ بِهِ فَأُولَئِكَ هُمُ الْخَاسِرُونَ ﴾ (سورة البقرة: 121).",
                 footerMushaf: "بناءً على صفحات مصحف المدينة (604 صفحة)",
                 juz: "جزء",
-                langBtn: "English",
+                langBtn: "EN",
                 resetProgress: "تصفير التقدم الحالي",
                 resetConfirm: "هل أنت متأكد من تصفير تقدمك في الختمة؟",
                 celebration: "تقبل الله منك! ✨ مبارك إتمام الختمة رقم ",
@@ -485,7 +477,9 @@
                 yearBadge: "Ramadan 1447 H — 2026 G",
                 backLink: "Table",
                 btnTasbih: "Adhkar",
-                targetTitle: "Times to finish Quran in Ramadan:",
+                btnSunnah: "Sunnah",
+                btnSalah: "Salah Guide",
+                targetTitle: "Number of Khatmas in Ramadan:",
                 dailyPagesLabel: "Pages per Day",
                 remainingPagesLabel: "Pages Remaining",
                 prayerDivide: "Suggested pages after each prayer:",
@@ -495,7 +489,7 @@
                 footerQuote: "“Those to whom We have given the Book recite it with its true recital. They [are the ones who] believe in it.” (Al-Baqarah: 121)",
                 footerMushaf: "Based on Madina Mushaf (604 pages)",
                 juz: "Juz",
-                langBtn: "عربي",
+                langBtn: "ع",
                 resetProgress: "Reset current progress",
                 resetConfirm: "Are you sure you want to reset your khatma progress?",
                 celebration: "May Allah accept! ✨ Congrats on finishing Khatma #",
@@ -655,53 +649,7 @@
         updateUI();
     </script>
 
-    <script>
-        // PWA Installation Logic
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
-
-        function updateInstallIcon() {
-            if (!installBtn) return;
-            const icon = installBtn.querySelector('i');
-            const ua = navigator.userAgent.toLowerCase();
-            if (ua.includes('android')) {
-                icon.className = 'fab fa-android';
-            } else if (ua.includes('iphone') || ua.includes('ipad') || ua.includes('ipod') || (ua.includes('macintosh') && navigator.maxTouchPoints > 1)) {
-                icon.className = 'fab fa-apple';
-            }
-        }
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (installBtn) {
-                updateInstallIcon();
-                installBtn.style.display = 'flex';
-            }
-        });
-
-        if (installBtn) {
-            installBtn.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    if (outcome === 'accepted') {
-                        deferredPrompt = null;
-                        installBtn.style.display = 'none';
-                    }
-                }
-            });
-        }
-
-        window.addEventListener('appinstalled', () => {
-            deferredPrompt = null;
-            if (installBtn) installBtn.style.display = 'none';
-        });
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js').catch(() => { });
-        }
-    </script>
+    <script src="shared.js"></script>
 </body>
 
 </html>

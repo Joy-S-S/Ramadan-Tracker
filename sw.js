@@ -1,13 +1,15 @@
 // Ramadan Tracker — Service Worker
-const CACHE_NAME = 'ramadan-tracker-v3';
+const CACHE_NAME = 'ramadan-tracker-v4';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './quran.html',
     './tasbih.html',
     './sunnah.html',
+    './salah.html',
     './radio.html',
     './shared.css',
+    './shared.js',
     './manifest.json',
     './icon.png',
     './masbaha.png'
