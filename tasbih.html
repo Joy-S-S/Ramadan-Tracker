@@ -599,6 +599,31 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .focus-controls {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) !important;
+                bottom: auto;
+                height: auto;
+                justify-content: center;
+                flex-direction: column;
+                gap: 15px;
+                width: auto;
+                padding: 0;
+            }
+
+            .focus-control-btn {
+                position: relative;
+                left: auto;
+                transform: none;
+            }
+
+            .focus-control-btn:active {
+                transform: scale(0.9);
+            }
+        }
+
         .move-placeholder {
             position: absolute;
             background: rgba(255, 255, 255, 0.05);
@@ -625,6 +650,16 @@
 
         .move-placeholder.pos-right {
             right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .move-placeholder {
+                position: relative;
+                left: auto !important;
+                right: auto !important;
+                margin-top: 15px;
+                display: block;
+            }
         }
 
         /* Transitioning the original circle */
