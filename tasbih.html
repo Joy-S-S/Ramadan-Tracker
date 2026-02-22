@@ -1264,19 +1264,6 @@
 
 
 
-        function increment(id, target) {
-            checkPWA();
-
-            const t = target || currentTarget;
-            counts[id] = (counts[id] || 0) + 1;
-            localStorage.setItem('tasbih_counts', JSON.stringify(counts));
-
-            if (currentTab === 'misbaha') {
-                updateCircleUI(id, t);
-            } else {
-                updateCardUI(id, t);
-            }
-        }
 
         function updateCircleUI(id, target) {
             const count = counts[id] || 0;
@@ -1489,6 +1476,9 @@
             // Only show on mobile screens
             if (window.innerWidth >= 769) return;
 
+            // Don't show if user already dismissed it this session, unless success message
+            if (mode !== 'success' && sessionStorage.getItem('pwa_banner_dismissed')) return;
+
             installBtn.style.display = 'none';
 
             if (mode === 'install') {
@@ -1501,10 +1491,16 @@
             } else if (mode === 'success') {
                 title.textContent = "تم التثبيت بنجاح! 🎉";
                 desc.textContent = "تم إضافة التطبيق إلى شاشتك الرئيسية. يرجى إغلاق المتصفح وفتح التطبيق للحصول على التجربة الكاملة.";
+                localStorage.setItem('pwa_installed', 'true');
                 setTimeout(() => banner.classList.remove('active'), 8000);
             }
 
             banner.classList.add('active');
+        }
+
+        function dismissBanner() {
+            document.getElementById('pwaBanner').classList.remove('active');
+            sessionStorage.setItem('pwa_banner_dismissed', 'true');
         }
 
         function triggerBannerInstall() {
@@ -1519,15 +1515,40 @@
             if (pwaCheckDone) return;
             const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-            if (!isStandalone) {
-                // If we have the install prompt saved (indicating not installed)
-                if (window.deferredPrompt) {
-                    showPWABanner('install');
-                } else {
-                    // Might be installed but in browser, or just not installable yet
-                    showPWABanner('open');
-                }
+            // If we are already in standalone app, correctly mark as installed
+            if (isStandalone) {
+                localStorage.setItem('pwa_installed', 'true');
                 pwaCheckDone = true;
+                return;
+            }
+
+            // If the browser provides an install prompt, it means the app is NOT currently on the device
+            if (window.deferredPrompt) {
+                localStorage.removeItem('pwa_installed'); // Reset state if previously "installed"
+                showPWABanner('install');
+                pwaCheckDone = true;
+                return;
+            }
+
+            const wasInstalled = localStorage.getItem('pwa_installed') === 'true';
+
+            if (wasInstalled) {
+                // If it was previously installed, suggest opening it
+                showPWABanner('open');
+                pwaCheckDone = true;
+            } else {
+                // Wait a bit to see if beforeinstallprompt fires (it's not immediate)
+                setTimeout(() => {
+                    if (pwaCheckDone) return;
+                    if (window.deferredPrompt) {
+                        localStorage.removeItem('pwa_installed');
+                        showPWABanner('install');
+                    } else {
+                        // Fallback: suggest opening/finding it if we can't detect an install option
+                        showPWABanner('open');
+                    }
+                    pwaCheckDone = true;
+                }, 1800);
             }
         }
 
@@ -1648,6 +1669,8 @@
         }
 
         function increment(id, target) {
+            checkPWA();
+
             const t = target || currentTarget;
             counts[id] = (counts[id] || 0) + 1;
             localStorage.setItem('tasbih_counts', JSON.stringify(counts));
@@ -1713,7 +1736,7 @@
                 <div class="pwa-banner-desc"></div>
                 <div class="pwa-banner-actions">
                     <button id="bannerInstallBtn" class="pwa-banner-btn" onclick="triggerBannerInstall()">تثبيت الآن</button>
-                    <button class="pwa-banner-btn secondary" onclick="document.getElementById('pwaBanner').classList.remove('active')">فهمت</button>
+                    <button class="pwa-banner-btn secondary" onclick="dismissBanner()">فهمت</button>
                 </div>
             `;
             document.body.appendChild(banner);
