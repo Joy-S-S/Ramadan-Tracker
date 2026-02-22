@@ -974,7 +974,41 @@
             renderGrid();
         }
 
+        // --- Interactive Feedback (Haptic & Audio) ---
+        let audioCtx = null;
+        function playFeedback() {
+            // 1. Haptic Feedback (Vibration)
+            if (navigator.vibrate) {
+                navigator.vibrate(40);
+            }
+
+            // 2. Audio Feedback (Web Audio API - subtle click)
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } catch (e) {
+                console.log('Audio feedback not supported');
+            }
+        }
+
         function increment(id, target) {
+            playFeedback();
             const t = target || currentTarget;
             counts[id] = (counts[id] || 0) + 1;
             localStorage.setItem('tasbih_counts', JSON.stringify(counts));

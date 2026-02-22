@@ -132,8 +132,12 @@
 
     // ===== INIT =====
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', buildNav);
+        document.addEventListener('DOMContentLoaded', () => {
+            buildNav();
+            document.body.classList.add('loaded');
+        });
     } else {
         buildNav();
+        document.body.classList.add('loaded');
     }
 })();
