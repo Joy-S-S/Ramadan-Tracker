@@ -492,6 +492,11 @@
         }
 
         /* ===== FOCUS MODE (ONE-HAND) ===== */
+        body.no-scroll {
+            overflow: hidden !important;
+            touch-action: none;
+        }
+
         #focusModeOverlay {
             position: fixed;
             top: 0;
@@ -509,6 +514,7 @@
             transition: opacity 0.4s ease;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
+            touch-action: none;
         }
 
         #focusModeOverlay.active {
@@ -1422,6 +1428,7 @@
             renderFocusCard(dhikr);
 
             overlay.classList.add('active');
+            document.body.classList.add('no-scroll');
             focusContainer.className = 'focus-card-container center';
 
             // Transition to corner only on mobile width (< 768px)
@@ -1490,6 +1497,7 @@
         function exitFocusMode() {
             const overlay = document.getElementById('focusModeOverlay');
             overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
             setTimeout(() => {
                 isFocusMode = false;
                 focusId = null;
