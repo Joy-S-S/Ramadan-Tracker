@@ -5,6 +5,7 @@ const ASSETS_TO_CACHE = [
     './index.html',
     './quran.html',
     './tasbih.html',
+    './sunnah.html',
     './radio.html',
     './shared.css',
     './manifest.json',
