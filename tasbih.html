@@ -662,6 +662,12 @@
         }
 
         /* PWA Banner Styles */
+        @media (min-width: 769px) {
+            .pwa-banner {
+                display: none !important;
+            }
+        }
+
         .pwa-banner {
             position: fixed;
             top: 20px;
@@ -1478,17 +1484,35 @@
             const banner = document.getElementById('pwaBanner');
             const title = banner.querySelector('.pwa-banner-title');
             const desc = banner.querySelector('.pwa-banner-desc');
+            const installBtn = document.getElementById('bannerInstallBtn');
+
+            // Only show on mobile screens
+            if (window.innerWidth >= 769) return;
+
+            installBtn.style.display = 'none';
 
             if (mode === 'install') {
                 title.textContent = "تثبيت التطبيق";
-                desc.textContent = "للحصول على أفضل تجربة واستخدام المسبحة بشكل مريح بدون قيود المتصفح، يرجى النقر على زر التثبيت في الأعلى.";
-            } else {
+                desc.textContent = "للحصول على أفضل تجربة واستخدام المسبحة بشكل مريح بدون قيود المتصفح، يرجى تثبيت التطبيق الآن.";
+                installBtn.style.display = 'inline-block';
+            } else if (mode === 'open') {
                 title.textContent = "استخدم التطبيق المثبت";
                 desc.textContent = "يبدو أنك قمت بتثبيت التطبيق بالفعل. يرجى فتحه من الشاشة الرئيسية للحصول على أفضل تجربة.";
+            } else if (mode === 'success') {
+                title.textContent = "تم التثبيت بنجاح! 🎉";
+                desc.textContent = "تم إضافة التطبيق إلى شاشتك الرئيسية. يرجى إغلاق المتصفح وفتح التطبيق للحصول على التجربة الكاملة.";
+                setTimeout(() => banner.classList.remove('active'), 8000);
             }
 
             banner.classList.add('active');
-            setTimeout(() => banner.classList.remove('active'), 10000);
+        }
+
+        function triggerBannerInstall() {
+            if (window.deferredPrompt) {
+                window.deferredPrompt.prompt();
+            } else {
+                alert("يرجى استخدام زر التثبيت في أعلى الصفحة أو من قائمة المتصفح.");
+            }
         }
 
         function checkPWA() {
@@ -1688,10 +1712,19 @@
                 <div class="pwa-banner-title"></div>
                 <div class="pwa-banner-desc"></div>
                 <div class="pwa-banner-actions">
-                    <button class="pwa-banner-btn" onclick="document.getElementById('pwaBanner').classList.remove('active')">فهمت</button>
+                    <button id="bannerInstallBtn" class="pwa-banner-btn" onclick="triggerBannerInstall()">تثبيت الآن</button>
+                    <button class="pwa-banner-btn secondary" onclick="document.getElementById('pwaBanner').classList.remove('active')">فهمت</button>
                 </div>
             `;
             document.body.appendChild(banner);
+
+            // Listener for successful installation
+            window.addEventListener('appinstalled', () => {
+                showPWABanner('success');
+                if (isFocusMode) {
+                    setTimeout(exitFocusMode, 2000);
+                }
+            });
         }
         initFocusOverlay();
 
