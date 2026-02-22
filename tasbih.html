@@ -540,16 +540,16 @@
         }
 
         .focus-card-container.bottom-right {
-            transform: translate(calc(100vw - var(--f-size) - var(--f-margin)), calc(100vh - var(--f-size) - 22vh)) scale(1);
+            transform: translate(calc(100vw - var(--f-size) - var(--f-margin)), calc(100vh - var(--f-size) - 130px)) scale(1);
         }
 
         .focus-card-container.bottom-left {
-            transform: translate(var(--f-margin), calc(100vh - var(--f-size) - 22vh)) scale(1);
+            transform: translate(var(--f-margin), calc(100vh - var(--f-size) - 130px)) scale(1);
         }
 
         .focus-controls {
             position: absolute;
-            bottom: 12vh;
+            bottom: 40px;
             width: 100%;
             height: 80px;
             display: flex;
@@ -661,11 +661,68 @@
             left: 0;
         }
 
-        .focus-card-container .progress-ring__circle {
-            r: var(--f-r) !important;
-            cx: calc(var(--f-ring) / 2) !important;
-            cy: calc(var(--f-ring) / 2) !important;
-            stroke-width: calc(var(--f-ring) / 20) !important;
+        /* PWA Banner Styles */
+        .pwa-banner {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-150%);
+            width: 90%;
+            max-width: 400px;
+            background: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 20px;
+            z-index: 10001;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            direction: rtl;
+            text-align: center;
+        }
+
+        .pwa-banner.active {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .pwa-banner-title {
+            color: var(--dark-green);
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .pwa-banner-desc {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .pwa-banner-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .pwa-banner-btn {
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pwa-banner-btn.secondary {
+            background: #eee;
+            color: #666;
+        }
+
+        .pwa-banner-btn:active {
+            transform: scale(0.95);
         }
 
         /* Custom Dhikr Spacing */
@@ -1202,6 +1259,7 @@
 
 
         function increment(id, target) {
+            checkPWA();
 
             const t = target || currentTarget;
             counts[id] = (counts[id] || 0) + 1;
@@ -1414,8 +1472,43 @@
         let isFocusMode = false;
         let focusSide = 'right';
         let focusId = null;
+        let pwaCheckDone = false;
+
+        function showPWABanner(mode) {
+            const banner = document.getElementById('pwaBanner');
+            const title = banner.querySelector('.pwa-banner-title');
+            const desc = banner.querySelector('.pwa-banner-desc');
+
+            if (mode === 'install') {
+                title.textContent = "تثبيت التطبيق";
+                desc.textContent = "للحصول على أفضل تجربة واستخدام المسبحة بشكل مريح بدون قيود المتصفح، يرجى النقر على زر التثبيت في الأعلى.";
+            } else {
+                title.textContent = "استخدم التطبيق المثبت";
+                desc.textContent = "يبدو أنك قمت بتثبيت التطبيق بالفعل. يرجى فتحه من قائمة التطبيقات في جهازك للحصول على أفضل تجربة.";
+            }
+
+            banner.classList.add('active');
+            setTimeout(() => banner.classList.remove('active'), 10000);
+        }
+
+        function checkPWA() {
+            if (pwaCheckDone) return;
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+            if (!isStandalone) {
+                // If we have the install prompt saved (indicating not installed)
+                if (window.deferredPrompt) {
+                    showPWABanner('install');
+                } else {
+                    // Might be installed but in browser, or just not installable yet
+                    showPWABanner('open');
+                }
+                pwaCheckDone = true;
+            }
+        }
 
         function enterFocusMode(id) {
+            checkPWA();
             isFocusMode = true;
             focusId = id;
             const overlay = document.getElementById('focusModeOverlay');
@@ -1586,6 +1679,19 @@
                 </div>
             `;
             document.body.appendChild(overlay);
+
+            // Add PWA Banner
+            const banner = document.createElement('div');
+            banner.id = 'pwaBanner';
+            banner.className = 'pwa-banner';
+            banner.innerHTML = `
+                <div class="pwa-banner-title"></div>
+                <div class="pwa-banner-desc"></div>
+                <div class="pwa-banner-actions">
+                    <button class="pwa-banner-btn" onclick="document.getElementById('pwaBanner').classList.remove('active')">فهمت</button>
+                </div>
+            `;
+            document.body.appendChild(banner);
         }
         initFocusOverlay();
 

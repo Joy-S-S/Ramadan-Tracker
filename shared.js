@@ -100,7 +100,7 @@
 
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
-        deferredPrompt = e;
+        window.deferredPrompt = e;
         if (installBtn) {
             updateInstallIcon();
             installBtn.style.display = 'flex';
@@ -109,11 +109,11 @@
 
     if (installBtn) {
         installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
+            if (window.deferredPrompt) {
+                window.deferredPrompt.prompt();
+                const { outcome } = await window.deferredPrompt.userChoice;
                 if (outcome === 'accepted') {
-                    deferredPrompt = null;
+                    window.deferredPrompt = null;
                     installBtn.style.display = 'none';
                 }
             }
@@ -121,7 +121,7 @@
     }
 
     window.addEventListener('appinstalled', () => {
-        deferredPrompt = null;
+        window.deferredPrompt = null;
         if (installBtn) installBtn.style.display = 'none';
     });
 
