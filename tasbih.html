@@ -32,6 +32,54 @@
     <link rel="apple-touch-icon" href="masbaha.png">
     <link rel="stylesheet" href="shared.css">
     <style>
+        :root {
+            --f-size: 280px;
+            --f-inner: 240px;
+            --f-ring: 260px;
+            --f-r: 120px;
+            --f-text: 24px;
+            --f-count: 42px;
+            --f-gap: 40px;
+            --f-margin: 20px;
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --f-size: 240px;
+                --f-inner: 200px;
+                --f-ring: 220px;
+                --f-r: 100px;
+                --f-text: 20px;
+                --f-count: 36px;
+                --f-gap: 30px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            :root {
+                --f-size: 200px;
+                --f-inner: 170px;
+                --f-ring: 190px;
+                --f-r: 85px;
+                --f-text: 18px;
+                --f-count: 32px;
+                --f-gap: 20px;
+                --f-margin: 15px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            :root {
+                --f-size: 180px;
+                --f-inner: 150px;
+                --f-ring: 170px;
+                --f-r: 75px;
+                --f-text: 16px;
+                --f-count: 28px;
+                --f-gap: 15px;
+            }
+        }
+
         /* ===== TASBIH-SPECIFIC OVERRIDES ===== */
         .container {
             display: flex;
@@ -441,6 +489,177 @@
                 width: 115px;
                 height: 115px;
             }
+        }
+
+        /* ===== FOCUS MODE (ONE-HAND) ===== */
+        #focusModeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(13, 77, 43, 0.95);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        #focusModeOverlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .focus-card-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            width: var(--f-size);
+            height: var(--f-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Positions using transform for smooth transition */
+        .focus-card-container.center {
+            transform: translate(calc(50vw - (var(--f-size) / 2)), calc(50vh - (var(--f-size) / 2) - 20px)) scale(1.1);
+        }
+
+        .focus-card-container.bottom-right {
+            transform: translate(calc(100vw - var(--f-size) - var(--f-margin)), calc(100vh - var(--f-size) - 120px)) scale(1);
+        }
+
+        .focus-card-container.bottom-left {
+            transform: translate(var(--f-margin), calc(100vh - var(--f-size) - 120px)) scale(1);
+        }
+
+        .focus-controls {
+            position: absolute;
+            bottom: 40px;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease 0.3s;
+        }
+
+        #focusModeOverlay.active .focus-controls {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .focus-control-btn {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid var(--gold);
+            color: var(--cream);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+        }
+
+        .focus-control-btn:active {
+            transform: translateX(-50%) scale(0.9);
+            background: var(--gold);
+            color: var(--dark-green);
+        }
+
+        @media (max-width: 400px) {
+            .focus-control-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+
+        .move-placeholder {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(198, 168, 77, 0.5);
+            color: var(--gold-light);
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        @media (min-width: 769px) {
+            .move-placeholder {
+                display: none !important;
+            }
+        }
+
+        .move-placeholder.pos-left {
+            left: 20px;
+        }
+
+        .move-placeholder.pos-right {
+            right: 20px;
+        }
+
+        /* Transitioning the original circle */
+        .focus-card-container .dhikr-circle-container {
+            width: var(--f-ring) !important;
+            height: var(--f-ring) !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .focus-card-container .dhikr-circle {
+            width: var(--f-inner) !important;
+            height: var(--f-inner) !important;
+            border-width: calc(var(--f-inner) / 20) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 0 !important;
+        }
+
+        .focus-card-container .dhikr-text {
+            font-size: var(--f-text) !important;
+            max-width: calc(var(--f-inner) * 0.85) !important;
+        }
+
+        .focus-card-container .dhikr-count {
+            font-size: var(--f-count) !important;
+        }
+
+        .focus-card-container .progress-ring {
+            width: var(--f-ring) !important;
+            height: var(--f-ring) !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .focus-card-container .progress-ring__circle {
+            r: var(--f-r) !important;
+            cx: calc(var(--f-ring) / 2) !important;
+            cy: calc(var(--f-ring) / 2) !important;
+            stroke-width: calc(var(--f-ring) / 20) !important;
         }
 
         /* Custom Dhikr Spacing */
@@ -1135,11 +1354,11 @@
             `;
 
             const circleContainer = container.querySelector('.dhikr-circle-container');
-            circleContainer.onclick = () => increment(dhikr.id, target);
+            circleContainer.onclick = () => enterFocusMode(dhikr.id);
             circleContainer.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    increment(dhikr.id, target);
+                    enterFocusMode(dhikr.id);
                 }
             });
 
@@ -1185,15 +1404,183 @@
             updateCardUI(dhikr.id, dhikr.target);
         }
 
+        // ===== FOCUS MODE LOGIC =====
+        let isFocusMode = false;
+        let focusSide = 'right';
+        let focusId = null;
+
+        function enterFocusMode(id) {
+            isFocusMode = true;
+            focusId = id;
+            const overlay = document.getElementById('focusModeOverlay');
+            const focusContainer = document.getElementById('focusCardContainer');
+            const dhikr = [...dhikrList, ...customAdhkar].find(d => d.id === id);
+
+            if (!dhikr) return;
+
+            // Update content of focus card
+            renderFocusCard(dhikr);
+
+            overlay.classList.add('active');
+            focusContainer.className = 'focus-card-container center';
+
+            // Transition to corner only on mobile width (< 768px)
+            if (window.innerWidth < 768) {
+                setTimeout(() => {
+                    const sideClass = focusSide === 'right' ? 'bottom-right' : 'bottom-left';
+                    focusContainer.classList.remove('center');
+                    focusContainer.classList.add(sideClass);
+                    updatePlaceholder();
+                }, 800);
+            } else {
+                // On desktop, just ensure placeholder is hidden (CSS handles it but JS can too)
+                updatePlaceholder();
+            }
+        }
+
+        function renderFocusCard(dhikr) {
+            const container = document.getElementById('focusCardContainer');
+            const count = counts[dhikr.id] || 0;
+            const target = currentTarget;
+
+            let textClass = 'dhikr-text';
+            if (dhikr.text.length > 50) textClass += ' extra-long';
+            else if (dhikr.text.length > 20) textClass += ' long';
+
+            container.innerHTML = `
+                <div class="dhikr-circle-container" id="container-focus-${dhikr.id}">
+                    <svg class="progress-ring">
+                        <circle id="ring-focus-${dhikr.id}" class="progress-ring__circle" 
+                            fill="transparent"/>
+                    </svg>
+                    <div class="dhikr-circle" id="circle-focus-${dhikr.id}">
+                        <div class="${textClass}">${dhikr.text}</div>
+                        <div class="dhikr-count-wrapper">
+                            <div class="dhikr-count" id="count-focus-${dhikr.id}">${count}</div>
+                            <div class="target-mini">/ ${target}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.querySelector('.dhikr-circle-container').onclick = () => increment(dhikr.id, target);
+            updateFocusUI(dhikr.id, target);
+        }
+
+        function swapFocusSide() {
+            focusSide = focusSide === 'right' ? 'left' : 'right';
+            const focusContainer = document.getElementById('focusCardContainer');
+            focusContainer.className = 'focus-card-container ' + (focusSide === 'right' ? 'bottom-right' : 'bottom-left');
+            updatePlaceholder();
+        }
+
+        function updatePlaceholder() {
+            const placeholder = document.getElementById('movePlaceholder');
+            const textAr = focusSide === 'right' ? 'انقل الذكر لليسار' : 'انقل الذكر لليمين';
+            placeholder.textContent = textAr;
+
+            // Place placeholder on the opposite side of the focused card
+            if (focusSide === 'right') {
+                placeholder.className = 'move-placeholder pos-left';
+            } else {
+                placeholder.className = 'move-placeholder pos-right';
+            }
+        }
+
+        function exitFocusMode() {
+            const overlay = document.getElementById('focusModeOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                isFocusMode = false;
+                focusId = null;
+                // Sync grid UI when returning
+                renderGrid();
+            }, 400);
+        }
+
+        function updateFocusUI(id, target) {
+            const count = counts[id] || 0;
+            const element = document.getElementById(`count-focus-${id}`);
+            const ring = document.getElementById(`ring-focus-${id}`);
+            const circle = document.getElementById(`circle-focus-${id}`);
+            const container = document.getElementById(`container-focus-${id}`);
+
+            if (element) element.textContent = count;
+            const progress = Math.min(count / target, 1);
+
+            if (container) {
+                container.style.transform = `scale(${1 + (progress * 0.08)})`;
+            }
+
+            if (ring) {
+                // Get the computed radius from CSS
+                const radius = parseFloat(getComputedStyle(ring).r);
+                const circumference = radius * 2 * Math.PI;
+                ring.style.strokeDasharray = `${circumference} ${circumference}`;
+                ring.style.strokeDashoffset = circumference - (progress * circumference);
+            }
+            if (circle) count >= target ? circle.classList.add('completed') : circle.classList.remove('completed');
+        }
+
+        function increment(id, target) {
+            const t = target || currentTarget;
+            counts[id] = (counts[id] || 0) + 1;
+            localStorage.setItem('tasbih_counts', JSON.stringify(counts));
+
+            // Vibrate if supported
+            if (navigator.vibrate) navigator.vibrate(20);
+
+            if (isFocusMode && focusId === id) {
+                updateFocusUI(id, t);
+            } else {
+                if (currentTab === 'misbaha') {
+                    updateCircleUI(id, t);
+                } else {
+                    updateCardUI(id, t);
+                }
+            }
+        }
+
+        // Add to translations
+        translations.ar.moveHere = "انقل الذكر هنا";
+
+        // Handle resize with focus mode
         let lastWidth = window.innerWidth;
         window.addEventListener('resize', () => {
-            // Only re-render if the width actually changed
-            // This prevents jumping when mobile URL bars hide/show
             if (window.innerWidth !== lastWidth) {
                 lastWidth = window.innerWidth;
-                renderGrid();
+                if (!isFocusMode) {
+                    renderGrid();
+                } else if (focusId) {
+                    const focusContainer = document.getElementById('focusCardContainer');
+                    if (window.innerWidth >= 768) {
+                        focusContainer.className = 'focus-card-container center';
+                    } else {
+                        const sideClass = focusSide === 'right' ? 'bottom-right' : 'bottom-left';
+                        focusContainer.className = 'focus-card-container ' + sideClass;
+                    }
+                    updatePlaceholder();
+                }
             }
         });
+
+        // Initialize Overlay HTML
+        function initFocusOverlay() {
+            const overlay = document.createElement('div');
+            overlay.id = 'focusModeOverlay';
+            overlay.innerHTML = `
+                <div id="focusCardContainer" class="focus-card-container"></div>
+                <div class="focus-controls">
+                    <div id="movePlaceholder" class="move-placeholder pos-left" onclick="swapFocusSide()">انقل الذكر هنا</div>
+                    <button class="focus-control-btn" onclick="exitFocusMode()" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+        initFocusOverlay();
+
         switchTab('misbaha');
         updateUI();
     </script>
